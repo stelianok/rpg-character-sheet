@@ -1,19 +1,23 @@
 const data = {
-  name: 'Claudio',
-  player: 'Ryan',
-  occupation: 'Caçador',
+  name: 'Matheus',
+  player: 'Rafa',
+  occupation: 'Ex Pro player',
   age: 21,
   sex: 'male',
-  birthplace: 'São paulo',
-  residence: 'São paulo',
+  birthplace: 'Campinas',
+  residence: 'Florianópolis',
 
   life: {
-    current: 12,
-    max: 12,
+    current: 13,
+    max: 13,
   },
   sanity: {
-    current: 62,
-    max: 62,
+    current: 54,
+    max: 54,
+  },
+  mana: {
+    current: 72,
+    max: 72,
   },
 
   weapons: [
@@ -42,44 +46,44 @@ const data = {
   ],
   attributes: [
     {
-      type: 'Aparência',
-      amount: 10,
+      type: 'Força',
+      amount: 13,
     },
     {
       type: 'Constituição',
-      amount: 10,
+      amount: 13,
     },
     {
       type: 'Destreza',
-      amount: 10,
+      amount: 13,
+    },
+    {
+      type: 'Inteligência',
+      amount: 16,
     },
     {
       type: 'Educação',
       amount: 10,
     },
     {
-      type: 'Força',
-      amount: 10,
-    },
-    {
-      type: 'Inteligência',
+      type: 'Carisma',
       amount: 10,
     },
     {
       type: 'Poder',
-      amount: 10,
-    },
-    {
-      type: 'Sorte',
-      amount: 10,
-    },
-    {
-      type: 'Movimento',
-      amount: 10,
+      amount: 11,
     },
     {
       type: '?',
-      amount: 10,
+      amount: 1,
+    },
+    {
+      type: '?',
+      amount: 1,
+    },
+    {
+      type: '?',
+      amount: 1,
     },
   ],
 }
@@ -113,9 +117,18 @@ $('#sanityCount').text(`${data.sanity.current}/${data.sanity.max}`)
 $('#sanityCurrent').val(data.sanity.current)
 $('#sanityMax').val(data.sanity.max)
 
+$('.manaBar').css(
+  'width',
+  `${calculateBar(data.mana.current, data.mana.max)}%`
+)
+$('#smanaCount').text(`${data.mana.current}/${data.mana.max}`)
+$('#manaCurrent').val(data.mana.current)
+$('#manaMax').val(data.mana.max)
+
 const diceModal = $('#diceAttributes')
 const lifeModal = $('#lifeModal')
 const sanityModal = $('#sanityModal')
+const manaModal = $('#manaModal')
 
 $(window).click(function (event) {
   if (event.target.id == 'diceAttributes') {
@@ -169,6 +182,10 @@ $('.lifeBar').click(function () {
 $('.sanityBar').click(function () {
   console.log(this)
   sanityModal.css('display', 'block')
+})
+$('.manaBar').click(function () {
+  console.log(this)
+  manaModal.css('display', 'block')
 })
 
 $('#addWeapon').click(function () {
@@ -282,6 +299,24 @@ $('#changeSanity').submit(function (event) {
   event.preventDefault()
 })
 
+$('#changemanay').submit(function (event) {
+  let current = Number($('#manaCurrent').val())
+  const max = Number($('#manaMax').val())
+
+  if (current > max) {
+    alert('A mana atual não pode ser maior que a maxima!')
+    current = max
+  }
+
+  data.mana.current = current
+  data.mana.max = max
+  $('.manaBar').css('width', `${calculateBar(current, max)}%`)
+  $('#manaCount').text(`${current}/${max}`)
+
+  closeModal('#manaModal')
+  event.preventDefault()
+})
+
 function calculateBar(current, max) {
   if (current > max) {
     return 100
@@ -296,46 +331,14 @@ function calculateBar(current, max) {
 }
 
 function calcDice(ability, dice) {
-  // Não encontrei uma forma mais fácil, então fiz assim
+  const f5 = Math.floor(ability / 5);
+  const f2 = Math.floor(ability / 2);
 
-  const table = [
-    { normal: 20 },
-    { normal: 19, good: 20 },
-    { normal: 18, good: 20 },
-    { normal: 17, good: 19 },
-    { normal: 16, good: 19, extreme: 20 },
-    { normal: 15, good: 18, extreme: 20 },
-    { normal: 14, good: 18, extreme: 20 },
-    { normal: 13, good: 17, extreme: 20 },
-    { normal: 12, good: 17, extreme: 20 },
-    { normal: 11, good: 16, extreme: 20 },
-    { normal: 10, good: 16, extreme: 19 },
-    { normal: 9, good: 16, extreme: 19 },
-    { normal: 8, good: 15, extreme: 19 },
-    { normal: 7, good: 14, extreme: 19 },
-    { normal: 6, good: 14, extreme: 18 },
-    { normal: 5, good: 13, extreme: 18 },
-    { normal: 4, good: 13, extreme: 18 },
-    { normal: 3, good: 12, extreme: 18 },
-    { normal: 2, good: 12, extreme: 18 },
-    { normal: 1, good: 11, extreme: 17 },
-  ]
-
-  const type = table[ability - 1]
-
-  if (type.extreme) {
-    if (dice >= type.extreme) return 'Extremo'
-    if (dice >= type.good) return 'Sucesso Bom'
-    if (dice >= type.normal) return 'Sucesso Normal'
-    if (dice <= type.normal) return 'Fracasso'
-  } else if (type.good) {
-    if (dice >= type.good) return 'Sucesso Bom'
-    if (dice >= type.normal) return 'Sucesso Normal'
-    if (dice <= type.normal) return 'Fracasso'
-  } else if (type.normal) {
-    if (dice >= type.normal) return 'Sucesso Normal'
-    if (dice <= type.normal) return 'Fracasso'
-  }
+  if (dice > 20 - f5) return 'Sucesso Extremo';
+  else if (dice > 20 - f2) return 'Sucesso Bom';
+  else if (dice > 20 - diceNumber) return 'Sucesso Normal';
+  else if (dice == 1) return 'Desastre';
+  else return 'Fracasso';
 }
 
 function rollDice(dice) {
