@@ -330,9 +330,9 @@ function calculateBar(current, max) {
   }
 }
 
-function calcDice(ability, dice) {
-  const f5 = Math.floor(ability / 5);
-  const f2 = Math.floor(ability / 2);
+function calcDice(diceNumber, dice) {
+  const f5 = Math.floor(diceNumber / 5);
+  const f2 = Math.floor(diceNumber / 2);
 
   if (dice > 20 - f5) return 'Sucesso Extremo';
   else if (dice > 20 - f2) return 'Sucesso Bom';
