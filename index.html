@@ -52,6 +52,20 @@
     </div>
   </div>
 
+  <div id="manaModal" class="modal with-input">
+    <div class="modal-content">
+      <h2>MODIFICAR SANIDADE</h2>
+      <hr />
+      <form class="formModal" id="changeMana">
+        <h3>Atual</h3>
+        <input type="number" name="manaCurrent" id="manaCurrent" min="0" />
+        <h3>Máximo</h3>
+        <input type="number" name="manaMax" id="manaMax" min="0" />
+        <input type="submit" value="Salvar" />
+      </form>
+    </div>
+  </div>
+
   <div id="addWeaponModal" class="modal with-input">
     <div class="modal-content">
       <h2>ADICIONAR ARMA</h2>
@@ -141,6 +155,7 @@
       </div>
 
       <div class="bars">
+
         <h4>Vida</h4>
         <div class="bar">
           <div class="lifeBar" style="width: 0%">
@@ -158,6 +173,9 @@
           </form>
         </div>
 
+
+
+
         <h4>Sanidade</h4>
         <div class="sanity">
           <div class="contentSanityBar">
@@ -173,22 +191,25 @@
           <input type="checkbox" id="crazed" name="crazed" value="crazed" />
           <label for="crazed"> Enlouquecido</label>
         </div>
-      </div>
 
-      <h4>Mana</h4>
-      <div class="mana">
-        <div class="contentManaBar">
-          <div class="manaBar" style="width: 0%">
-            <p class="manacount" id="manaCount"></p>
+        <h4>Mana</h4>
+        <div class="mana">
+          <div class="contentManaBar">
+            <div class="manaBar" style="width: 0%">
+              <p class="manacount" id="manaCount"></p>
+            </div>
+          </div>
+          <div class="checkboxs">
+            <input type="checkbox" id="escasso" name="escasso" value="escasso" />
+            <label for="escasso"> Escasso de Mana</label>
+            <input type="checkbox" id="seco" name="seco" value="seco" />
+            <label for="crazed"> Seco de mana</label>
           </div>
         </div>
-        <div class="checkboxs">
-          <input type="checkbox" id="escasso" name="escasso" value="escasso" />
-          <label for="escasso"> Escasso de Mana</label>
-          <input type="checkbox" id="seco" name="seco" value="seco" />
-          <label for="crazed"> Seco de mana</label>
-        </div>
+
       </div>
+
+
 
       <div class="extra">
         <div class="damage">

@@ -121,7 +121,7 @@ $('.manaBar').css(
   'width',
   `${calculateBar(data.mana.current, data.mana.max)}%`
 )
-$('#smanaCount').text(`${data.mana.current}/${data.mana.max}`)
+$('#manaCount').text(`${data.mana.current}/${data.mana.max}`)
 $('#manaCurrent').val(data.mana.current)
 $('#manaMax').val(data.mana.max)
 
@@ -299,7 +299,7 @@ $('#changeSanity').submit(function (event) {
   event.preventDefault()
 })
 
-$('#changemanay').submit(function (event) {
+$('#changeMana').submit(function (event) {
   let current = Number($('#manaCurrent').val())
   const max = Number($('#manaMax').val())
 
