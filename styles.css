@@ -9,7 +9,7 @@
 body {
     background: #0a0b0c;
     color: #fff;
-    font-family: 'Itim', sans-serif;
+    font-family: "Times New Roman", Times, serif;
 }
 
 hr {
@@ -208,7 +208,7 @@ input {
     background-color: #0a0b0c;
     color: #fff;
 
-    font-family: 'Itim', sans-serif;
+    font-family: "Times New Roman", Times, serif;
 }
 
 input:focus {
@@ -224,7 +224,7 @@ select {
     background-color: #0a0b0c;
     color: #fff;
 
-    font-family: 'Itim', sans-serif;
+    font-family: "Times New Roman", Times, serif;
 }
 
 select:focus {
