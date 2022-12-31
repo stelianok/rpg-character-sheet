@@ -62,10 +62,8 @@ const data = {
       type: 'Poder',
       amount: 18,
     },
-    {
-      type: '-',
-      amount: 0,
-    },
+  ],
+  skills: [
     {
       type: 'Briga',
       amount: 10,
@@ -138,7 +136,7 @@ const data = {
       type: 'Atletismo',
       amount: 4,
     },
-  ],
+  ]
 }
 
 
@@ -148,6 +146,10 @@ data.weapons.map((weapon, index) => {
 
 data.attributes.map((attribute, index) => {
   addAttribute(attribute, index)
+})
+
+data.skills.map((skill, index) => {
+  addSkill(skill, index)
 })
 
 $('#name').val(data.name)
@@ -448,6 +450,19 @@ function addAttribute(attribute, id) {
   </div>
   `)
   $('#attributesList').append(newAttribute)
+}
+
+function addSkill(skill, id) {
+  const newSkill = $(
+    `<div class="skill" id="skill_${id}">
+    <a onclick="rollAtribute('${skill.type}', ${skill.amount})">
+      <img class="skillDice" src="./img/dado.png" alt="Dado">
+    </a>
+    <h3>${skill.type}</h3>
+    <input type="text" name="appearance" value="${skill.amount}" id="skill_input_${id}"/>
+  </div>
+  `)
+  $('#skillsList').append(newSkill)
 }
 
 function deleteWeapon(id) {

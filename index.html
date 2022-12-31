@@ -154,7 +154,6 @@
     <div class="character">
       <div class="characterHeader">
         <img class="characterPhoto" src="./img/character.png" alt="Foto" />
-        <img class="dice" src="./img/dado.png" alt="Dado" />
       </div>
 
       <div class="bars">
@@ -176,9 +175,6 @@
           </form>
         </div>
 
-
-
-
         <h4>Sanidade</h4>
         <div class="sanity">
           <div class="contentSanityBar">
@@ -186,7 +182,6 @@
               <p class="barcount" id="sanityCount"></p>
             </div>
           </div>
-          <img class="sanityDice" src="./img/dado.png" alt="Dado" />
         </div>
         <div class="checkboxs">
           <input type="checkbox" id="traumatized" name="traumatized" value="traumatized" />
@@ -197,7 +192,7 @@
 
         <h4>Mana</h4>
         <div class="mana">
-          <div class="contentManaBar">
+          <div class="contentSanityBar">
             <div class="manaBar" style="width: 0%">
               <p class="manacount" id="manaCount"></p>
             </div>
@@ -209,11 +204,7 @@
             <label for="seco"> Seco de mana</label>
           </div>
         </div>
-
       </div>
-
-
-
       <div class="extra">
         <div class="damage">
           <p>Dano extra</p>
@@ -229,16 +220,19 @@
         </div>
       </div>
     </div>
+
     <div class="attributes border">
       <h2 class="grid-title">ATRIBUTOS</h2>
       <hr />
-
       <div class="attributesList" id="attributesList"></div>
     </div>
-    <div class="expertise border">
+
+    <div class="skills border">
       <h2 class="grid-title">PERICIA</h2>
       <hr />
+      <div class="skillsList" id="skillsList"></div>
     </div>
+
     <div class="combat border">
       <div class="combatHeader">
         <h2 class="grid-title">COMBATE</h2>
@@ -261,10 +255,7 @@
       </table>
     </div>
 
-    <div class="expertise2 border">
-      <h2 class="grid-title">PERICIA</h2>
-      <hr />
-    </div>
+
   </div>
 
   <div class="modal-overlay active">

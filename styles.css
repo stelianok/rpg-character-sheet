@@ -42,17 +42,17 @@ h1.title {
 }
 
 h2.grid-title {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .container {
     display: grid;
     grid-template-areas:
         'details details details character'
-        'attributes attributes attributes expertise'
+        'attributes attributes skills skills'
         'combat combat combat combat'
-        'expertise2 expertise2 expertise2 expertise2';
+        'skill2 skill2 skill2 skill2';
     grid-gap: 30px;
 
     margin-left: auto;
@@ -101,18 +101,13 @@ h2.grid-title {
 
 .attributes {
     grid-area: attributes;
+
 }
 
-.expertise {
-    grid-area: expertise;
-    height: 400px;
-}
+.skills {
+    grid-area: skills;
 
-.expertise2 {
-    grid-area: expertise2;
-    height: 400px;
 }
-
 
 .combat {
     grid-area: combat;
@@ -252,7 +247,7 @@ select:focus {
 
 .contentSanityBar {
     align-self: end;
-    width: 80%;
+    width: 100%;
     background-color: grey;
     margin-bottom: 10px;
     margin-top: 5px;
@@ -352,6 +347,7 @@ select:focus {
     width: 100px;
 }
 
+/*  -----------------------atributos---------------------    */
 .attributes .attributesList {
     display: flex;
     flex-flow: row wrap;
@@ -390,6 +386,47 @@ select:focus {
     align-self: center;
 }
 
+/* -----------------------atributos---------------------   */
+/*  -----------------------skills-----------------------   */
+.skills .skillsList {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.skills .skill {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: 85px;
+}
+
+.skill img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 35px;
+}
+
+.skill a {
+    cursor: pointer;
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    transition: transform .8s ease-in-out;
+}
+
+.skill a:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+
+.skill input {
+    width: 50%;
+    text-align: center;
+    font-size: 18px;
+    align-self: center;
+}
+
+/*  -----------------------skills------------------------  */
 /* The Modal (background) */
 
 .modal {
