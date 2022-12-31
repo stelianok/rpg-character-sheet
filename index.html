@@ -89,13 +89,14 @@
             </td>
             <td>
               <select id="weaponType" name="weaponType">
-                <option value="fire">Fogo</option>
-                <option value="arch">Arco</option>
-                <option value="fight">Briga</option>
+                <option value="Corpo a Corpo">Corpo a Corpo</option>
+                <option value="Longa distância">Longa distância</option>
+                <option value="Mágica">Mágica</option>
+                <option value="Utilitário">Utilitário</option>
               </select>
             </td>
             <td>
-              <input type="text" name="weaponDamage" id="weaponDamege" />
+              <input type="text" name="weaponDamage" id="weaponDamage" />
             </td>
             <td>
               <input type="text" name="weaponNumCurrent" id="weaponNumCurrent" />
@@ -212,11 +213,15 @@
         </div>
         <div class="body">
           <p>Armadura</p>
-          <p>(Colete)</p>
+          <input type="text" name="damage" id="damage" />
         </div>
         <div class="exposure">
           <p>XP</p>
           <input type="text" name="damage" id="damage" />
+          <div class="level">
+            <p>Nível</p>
+            <input type="text" name="damage" id="damage" />
+          </div>
         </div>
       </div>
     </div>
@@ -251,10 +256,21 @@
           <th>Alcance</th>
           <th>Defeito</th>
           <th>Área</th>
+          <th>Excluir</th>
         </tr>
       </table>
     </div>
 
+    <div class="inventory border">
+      <h2 class="grid-title">INVENTÁRIO</h2>
+      <hr />
+      <div class="skillsList" id="skillsList"></div>
+    </div>
+    <div class="spells border">
+      <h2 class="grid-title">MAGIAS</h2>
+      <hr />
+      <div class="skillsList" id="skillsList"></div>
+    </div>
 
   </div>
 

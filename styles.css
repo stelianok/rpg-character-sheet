@@ -52,7 +52,8 @@ h2.grid-title {
         'details details details character'
         'attributes attributes skills skills'
         'combat combat combat combat'
-        'skill2 skill2 skill2 skill2';
+        'inventory inventory inventory inventory'
+        'spells spells spells spells';
     grid-gap: 30px;
 
     margin-left: auto;
@@ -111,6 +112,16 @@ h2.grid-title {
 
 .combat {
     grid-area: combat;
+    height: 400px;
+}
+
+.inventory {
+    grid-area: inventory;
+    height: 400px;
+}
+
+.spells {
+    grid-area: spells;
     height: 400px;
 }
 
@@ -342,6 +353,12 @@ select:focus {
 }
 
 .extra .exposure {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+}
+
+.extra .level {
     display: flex;
     flex-direction: column;
     width: 100px;

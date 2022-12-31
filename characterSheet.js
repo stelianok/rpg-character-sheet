@@ -1,5 +1,5 @@
 const data = {
-  name: 'Número 1',
+  name: 'Numerinhos',
   player: 'Mestre',
   occupation: '?',
   age: 23,
@@ -23,6 +23,17 @@ const data = {
   weapons: [
     {
       name: 'Glock-17',
+      type: 'Arma',
+      damage: '1d6',
+      numCurrent: 16,
+      numMax: 48,
+      attack: '3 tiros',
+      reach: '20 m',
+      defect: 1,
+      area: 'Alvo',
+    },
+    {
+      name: 'AK-47',
       type: 'Arma',
       damage: '1d6',
       numCurrent: 16,
@@ -293,7 +304,7 @@ $('#addWeaponForm').submit(function (event) {
   const weapon = {
     name: $('#weaponName').val(),
     type: $('#weaponType').val(),
-    damage: $('#weapondamage').val(),
+    damage: $('#weaponDamage').val(),
     numCurrent: $('#weaponNumCurrent').val(),
     numMax: $('#weaponNumMax').val(),
     attack: $('#weaponAttack').val(),
@@ -417,15 +428,14 @@ function closeModal(modal) {
   Modal.css('display', 'none')
 }
 
+function deleteWeapon(id) {
+  $(`tr#${id}`).remove()
+}
+
 function addWeaponToTable(weapon, id) {
   const newWeapon = $(`
-      <tr id="weapon_${id}">
-        <td>
-            <button onclick="deleteWeapon(${id})">
-                <i class="fa fa-trash-o trashcan"></i>
-            </button>
-            ${weapon.name}
-        </td>
+      <tr id="${id}">
+        <td>${weapon.name}</td>
         <td>${weapon.type}</td>
         <td>${weapon.damage}</td>
         <td>${weapon.numCurrent}</td>
@@ -434,6 +444,11 @@ function addWeaponToTable(weapon, id) {
         <td>${weapon.reach}</td>
         <td>${weapon.defect}</td>
         <td>${weapon.area}</td>
+        <td>
+            <button onclick="deleteWeapon(${id})">
+                <i class="fa fa-trash-o trashcan"></i>
+            </button>
+        </td>
     </tr>`
   )
   $('table#weapons').append(newWeapon)
@@ -456,7 +471,7 @@ function addSkill(skill, id) {
   const newSkill = $(
     `<div class="skill" id="skill_${id}">
     <a onclick="rollAtribute('${skill.type}', ${skill.amount})">
-      <img class="skillDice" src="./img/dado.png" alt="Dado">
+      <img class="attribiteDice" src="./img/dado.png" alt="Dado">
     </a>
     <h3>${skill.type}</h3>
     <input type="text" name="appearance" value="${skill.amount}" id="skill_input_${id}"/>
@@ -465,6 +480,4 @@ function addSkill(skill, id) {
   $('#skillsList').append(newSkill)
 }
 
-function deleteWeapon(id) {
-  $(`tr#${id}`).remove()
-}
+
