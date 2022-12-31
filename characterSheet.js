@@ -1,61 +1,50 @@
 const data = {
-  name: 'Matheus',
-  player: 'Rafa',
-  occupation: 'Ex Pro player',
-  age: 21,
+  name: 'Número 1',
+  player: 'Mestre',
+  occupation: '?',
+  age: 23,
   sex: 'male',
-  birthplace: 'Campinas',
-  residence: 'Florianópolis',
+  birthplace: '?',
+  residence: '?',
 
   life: {
-    current: 13,
-    max: 13,
+    current: 64,
+    max: 64,
   },
   sanity: {
-    current: 54,
-    max: 54,
+    current: 32,
+    max: 32,
   },
   mana: {
-    current: 72,
-    max: 72,
+    current: 96,
+    max: 96,
   },
 
   weapons: [
     {
-      name: 'Balestra',
-      type: 'Arco',
-      damage: '1d20',
-      numCurrent: 1,
-      numMax: 1,
-      attack: 5,
-      reach: '10 m',
+      name: 'Glock-17',
+      type: 'Arma',
+      damage: '1d6',
+      numCurrent: 16,
+      numMax: 48,
+      attack: '3 tiros',
+      reach: '20 m',
       defect: 1,
-      area: '',
-    },
-    {
-      name: 'Canivete',
-      type: 'Briga',
-      damage: '1d10',
-      numCurrent: '',
-      numMax: '',
-      attack: '1/2',
-      reach: '',
-      defect: 1,
-      area: '',
+      area: 'Alvo',
     },
   ],
   attributes: [
     {
       type: 'Força',
-      amount: 13,
+      amount: 8,
     },
     {
       type: 'Constituição',
-      amount: 13,
+      amount: 14,
     },
     {
       type: 'Destreza',
-      amount: 13,
+      amount: 16,
     },
     {
       type: 'Inteligência',
@@ -63,30 +52,95 @@ const data = {
     },
     {
       type: 'Educação',
-      amount: 10,
+      amount: 18,
     },
     {
       type: 'Carisma',
-      amount: 10,
+      amount: 8,
     },
     {
       type: 'Poder',
-      amount: 11,
+      amount: 18,
     },
     {
-      type: '?',
+      type: '-',
+      amount: 0,
+    },
+    {
+      type: 'Briga',
+      amount: 10,
+    },
+    {
+      type: 'Tiro',
+      amount: 12,
+    },
+    {
+      type: 'Arremesso',
+      amount: 14,
+    },
+    {
+      type: 'Medicina',
+      amount: 16,
+    },
+    {
+      type: 'Investigação',
+      amount: 16,
+    },
+    {
+      type: 'Refletir',
+      amount: 3,
+    },
+    {
+      type: 'História',
+      amount: 3,
+    },
+    {
+      type: 'Charme',
+      amount: 12,
+    },
+    {
+      type: 'Intimidação',
+      amount: 12,
+    },
+    {
+      type: 'Natureza',
+      amount: 3,
+    },
+    {
+      type: 'Acrobacia',
       amount: 1,
     },
     {
-      type: '?',
+      type: 'Lábia',
+      amount: 14,
+    },
+    {
+      type: 'Percepção',
+      amount: 7,
+    },
+    {
+      type: 'Roubo',
+      amount: 6,
+    },
+    {
+      type: 'Furtividade',
       amount: 1,
     },
     {
-      type: '?',
-      amount: 1,
+      type: 'Computação',
+      amount: 3,
+    },
+    {
+      type: 'Condução',
+      amount: 3,
+    },
+    {
+      type: 'Atletismo',
+      amount: 4,
     },
   ],
 }
+
 
 data.weapons.map((weapon, index) => {
   addWeaponToTable(weapon, index)
@@ -147,7 +201,7 @@ $(window).click(function (event) {
   }
 })
 
-function rollAtribute(atribute, amount) {
+function rollAtribute(amount) {
   console.log(this)
 
   diceModal.css('display', 'block')
@@ -233,19 +287,10 @@ $('#crazed').change(function () {
 })
 
 $('#addWeaponForm').submit(function (event) {
-  var weaponType = ''
-
-  if ($('#weaponType').val() == 'fire') {
-    weaponType = 'Fogo'
-  } else if ($('#weaponType').val() == 'arch') {
-    weaponType = 'Arco'
-  } else if ($('#weaponType').val() == 'fight') {
-    weaponType = 'Briga'
-  }
 
   const weapon = {
     name: $('#weaponName').val(),
-    type: weaponType,
+    type: $('#weaponType').val(),
     damage: $('#weapondamage').val(),
     numCurrent: $('#weaponNumCurrent').val(),
     numMax: $('#weaponNumMax').val(),
@@ -371,7 +416,8 @@ function closeModal(modal) {
 }
 
 function addWeaponToTable(weapon, id) {
-  const newWeapon = $(`<tr id="weapon_${id}">
+  const newWeapon = $(`
+      <tr id="weapon_${id}">
         <td>
             <button onclick="deleteWeapon(${id})">
                 <i class="fa fa-trash-o trashcan"></i>
@@ -386,18 +432,21 @@ function addWeaponToTable(weapon, id) {
         <td>${weapon.reach}</td>
         <td>${weapon.defect}</td>
         <td>${weapon.area}</td>
-    </tr>`)
+    </tr>`
+  )
   $('table#weapons').append(newWeapon)
 }
 
 function addAttribute(attribute, id) {
-  const newAttribute = $(`<div class="attribute" id="attribute_${id}">
+  const newAttribute = $(
+    `<div class="attribute" id="attribute_${id}">
     <a onclick="rollAtribute('${attribute.type}', ${attribute.amount})">
       <img class="attributeDice" src="./img/dado.png" alt="Dado">
     </a>
     <h3>${attribute.type}</h3>
-    <input type="text" name="appearance" value="${attribute.amount}" id="attribute_input_${id}" disabled>
-  </div>`)
+    <input type="text" name="appearance" value="${attribute.amount}" id="attribute_input_${id}"/>
+  </div>
+  `)
   $('#attributesList').append(newAttribute)
 }
 
