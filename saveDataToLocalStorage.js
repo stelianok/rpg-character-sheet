@@ -65,7 +65,7 @@ let power = document.getElementById("attribute_input_6").value;
 
 let items = [];
 
-/** Weapon Array
+/** Item Array
  * 
  * Name:
  * type:
@@ -112,14 +112,14 @@ $("#weapons").find('tbody tr').each(
 // Esses códigos servem apenas para verificar se as informações
 // são resgatadas corretamente
 
-// console.warn(characterName, playerName, occupation, age, sex, birthplace, residence)
+console.warn(characterName, playerName, occupation, age, sex, birthplace, residence)
 
-// console.warn(`Vida: ${lifeCurrent}/${lifeMax}`);
-// console.warn(`Vida: ${sanityCurrent}/${sanityMax}`);
-// console.warn(`Vida: ${manaCurrent}/${manaMax}`);
+console.warn(`Vida: ${lifeCurrent}/${lifeMax}`);
+console.warn(`Vida: ${sanityCurrent}/${sanityMax}`);
+console.warn(`Vida: ${manaCurrent}/${manaMax}`);
 
-// console.warn(`strenght: ${strenght}, constitution: ${constitution},
-//  dex: ${dexterity}, intelligence: ${intelligence}, education: ${education}
-//  charisma: ${charisma} power: ${power}`);
+console.warn(`strenght: ${strenght}, constitution: ${constitution},
+ dex: ${dexterity}, intelligence: ${intelligence}, education: ${education}
+ charisma: ${charisma} power: ${power}`);
 
 console.warn(items);

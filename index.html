@@ -9,11 +9,11 @@
 
   <link rel="stylesheet" href="styles.css" />
 
-  <title>Ficha do personagem</title>
+  <title>Ficha de agente da Ordem Carmesim</title>
 </head>
 
 <body>
-  <h1 class="title">Perfil de investigador</h1>
+  <h1 class="title">Ficha de agente da Ordem Carmesim</h1>
 
   <!-- modal -->
   <div id="diceAttributes" class="modal">
@@ -76,9 +76,9 @@
             <th>Nome</th>
             <th>Tipo</th>
             <th>Dano</th>
-            <th>Quantidade Atual</th>
-            <th>Quantidade. Máxima</th>
-            <th>Ataque</th>
+            <th>Munição Atual</th>
+            <th>Munição Máxima</th>
+            <th>Quantidade permitida</th>
             <th>Alcance</th>
             <th>Defeito</th>
             <th>Área</th>
@@ -140,9 +140,9 @@
         <select id="sex" name="sex">
           <option value="male">Masculino</option>
           <option value="female">Feminino</option>
-          <option value="other">Não-binário</option>
-          <option value="other">Gênero Fluído</option>
-          <option value="other">Genderqueer</option>
+          <option value="nb">Não-binário</option>
+          <option value="gf">Gênero Fluído</option>
+          <option value="gq">Genderqueer</option>
           <option value="other">Outros</option>
         </select>
         <h4>Local de nascimento</h4>
@@ -221,7 +221,7 @@
         </div>
         <div class="body">
           <p>Armadura</p>
-          <input type="text" name="damage" id="damage" />
+          <p>(Colete)</p>
         </div>
         <div class="exposure">
           <p>XP</p>
@@ -251,9 +251,9 @@
           <th>Nome</th>
           <th>Tipo</th>
           <th>Dano</th>
-          <th>Quantidade Atual</th>
-          <th>Quantidade Máxima</th>
-          <th>Ataque</th>
+          <th>Munição Atual</th>
+          <th>Munição Máxima</th>
+          <th>Quantidade permitida</th>
           <th>Alcance</th>
           <th>Defeito</th>
           <th>Área</th>

@@ -7,7 +7,7 @@
 }
 
 body {
-    background: #0a0b0c;
+    background: url('background.gif');
     color: #fff;
     font-family: "Times New Roman", Times, serif;
 }
