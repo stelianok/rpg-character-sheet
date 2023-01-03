@@ -147,7 +147,18 @@ const data = {
       type: 'Atletismo',
       amount: 4,
     },
-  ]
+  ],
+  spells: [
+    {
+      name: 'AK-47',
+      type: 'Arma',
+      description: '1d6',
+      damage: 16,
+      reach: 48,
+      mana: '3 tiros',
+      reach: '20 m',
+    },
+  ],
 }
 
 
@@ -259,6 +270,10 @@ $('#addWeapon').click(function () {
   openModal('#addWeaponModal')
 })
 
+$('#addSpell').click(function () {
+  openModal('#addSpellModal')
+})
+
 $('#lesion').change(function () {
   if (this.checked) {
     console.log('Modo lesionamento grave ativado!')
@@ -318,6 +333,25 @@ $('#addWeaponForm').submit(function (event) {
   addWeaponToTable(weapon, id)
 
   closeModal('#addWeaponModal')
+  event.preventDefault()
+})
+
+$('#addSpellForm').submit(function (event) {
+
+  const spell = {
+    name: $('#spellName').val(),
+    type: $('#spellType').val(),
+    description: $('#spellDescription').val(),
+    damage: $('#spellDamage').val(),
+    reach: $('#spellReach').val(),
+    area: $('#spellMana').val(),
+  }
+
+  data.spells.push(spell)
+  const id = data.spells.length - 1
+  addSpellToTable(spell, id)
+
+  closeModal('#addSpellModal')
   event.preventDefault()
 })
 
@@ -452,6 +486,25 @@ function addWeaponToTable(weapon, id) {
     </tr>`
   )
   $('table#weapons').append(newWeapon)
+}
+
+function addSpellToTable(spell, id) {
+  const newSpell = $(`
+      <tr id="${id}">
+        <td>${spell.name}</td>
+        <td>${spell.type}</td>
+        <td>${spell.description}</td>
+        <td>${spell.damage}</td>
+        <td>${spell.reach}</td>
+        <td>${spell.mana}</td>
+        <td>
+            <button onclick="deleteSpell(${id})">
+                <i class="fa fa-trash-o trashcan"></i>
+            </button>
+        </td>
+    </tr>`
+  )
+  $('table#spells').append(newSpell)
 }
 
 function addAttribute(attribute, id) {
