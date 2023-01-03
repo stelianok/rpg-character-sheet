@@ -191,6 +191,75 @@ table.weapons td button {
     background: #0a0b0c;
 }
 
+.spells .grid-title {
+    flex: 1;
+}
+
+.spells .spellHeader {
+    display: flex;
+    flex-direction: row;
+    justify-self: stretch;
+}
+
+.spells .spellHeader button {
+    align-self: center;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    font-size: 22px;
+    background: #0a0b0c;
+    border: 0.1px solid #a2a2a2;
+    margin-right: 50px;
+}
+
+table.spells {
+    display: block;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-block-end: auto;
+    border-collapse: collapse;
+    white-space: pre-wrap;
+    width: 90%
+}
+
+table.spells tr:first-child {
+    border-bottom: 2px solid #a2a2a2;
+}
+
+table.spell tr {
+    border-bottom: 0.1px solid #a2a2a2;
+}
+
+table.spells th {
+    text-align: center;
+    height: 25px;
+    width: 10%;
+}
+
+table.spells td {
+    text-align: center;
+    height: 35px;
+
+}
+
+table.spells td input {
+    text-align: center;
+    width: 75%;
+    border-bottom: 0.1px solid #a2a2a2;
+}
+
+table.spells td select {
+    font-size: 16px;
+}
+
+
+table.spells td button {
+    color: #fff;
+    background: #0a0b0c;
+}
+
+
 .trashcan {
     color: white;
     width: 15px;
