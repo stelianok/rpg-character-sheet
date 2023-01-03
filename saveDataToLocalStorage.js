@@ -36,8 +36,6 @@
  * ?:
  */
 
-
-
 // Player Info
 let characterName = document.getElementById("name").value;
 let playerName = document.getElementById("player").value;
@@ -56,6 +54,23 @@ let sanityMax = document.getElementById("sanityMax").value;
 
 let manaCurrent = document.getElementById("manaCurrent").value;
 let manaMax = document.getElementById("manaMax").value;
+
+// Checkboxes
+let lesion = document.getElementById("lesion").value;
+let injury = document.getElementById("injury").value;
+let dying = document.getElementById("dying").value;
+
+let manaScarce = document.getElementById("manaScarce").value;
+let noMana = document.getElementById("noMana").value;
+
+let slightlyInsane = document.getElementById("traumatized").value;
+let insane = document.getElementById("crazed").value;
+
+// Extra Info
+let extraDamage = document.getElementById("damage").value;
+let armor = document.getElementById("armor").value;
+let xp = document.getElementById("xp").value;
+let level = document.getElementById("level").value;
 
 // Attributes
 let strenght = document.getElementById("attribute_input_0").value;
@@ -130,6 +145,24 @@ $("#weapons").find('tbody tr').each(
   }
 )
 
+function saveDataToLocalStorage() {
+
+}
+
+function download(filename, text) {
+  var pom = document.createElement('a');
+  pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  pom.setAttribute('download', filename);
+
+  if (document.createEvent) {
+    var event = document.createEvent('MouseEvents');
+    event.initEvent('click', true, true);
+    pom.dispatchEvent(event);
+  }
+  else {
+    pom.click();
+  }
+}
 // Esses códigos servem apenas para verificar se as informações
 // são resgatadas corretamente
 
