@@ -13,10 +13,15 @@
 </head>
 
 <body>
+  <header>
+    <button class="updateButton">Save</button>
+    <button class="updateButton" onclick="download('das.txt','sda')" id="">Export JSON file</button>
+    <button class="updateButton">Import JSON file</button>
+  </header>
   <h1 class="title">Ficha de agente da Ordem Carmesim</h1>
 
   <!-- modal -->
-  <!-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀
+  <!-- ⠀⠀⠀⠀⠀⠀ ⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀
   ⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀⠀⠀⠀⠀⠀
   ⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⠋⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠈⢻⣿⣿⡄⠀⠀⠀⠀
   ⠀⠀⠀⠀⠀⠀⠀⣸⣿⡏⠀⠀⠀⣠⣶⣾⣿⣿⣿⠿⠿⠿⢿⣿⣿⣿⣄⠀⠀⠀
@@ -143,6 +148,57 @@
     </div>
   </div>
 
+  <div id="addSpellModal" class="modal with-input">
+    <div class="modal-content">
+      <h2>ADICIONAR MAGIAS</h2>
+      <hr />
+      <form id="addSpellForm" action="">
+        <table class="spells" id="newSpell">
+          <tr>
+            <th>Nome</th>
+            <th>Elemento</th>
+            <th>Descrição</th>
+            <th>Dano</th>
+            <th>Alcance</th>
+            <th>Mana</th>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" name="spellName" id="spellName" />
+            </td>
+            <td>
+              <select id="spellType" name="spellType">
+                <option value="Fogo">Fogo</option>
+                <option value="Agua">Água</option>
+                <option value="Terra">Terra</option>
+                <option value="Ar">Ar</option>
+                <option value="Sangue">Sangue</option>
+                <option value="Veneno">Veneno</option>
+                <option value="Encantamento">Encantamento</option>
+                <option value="Gelo">Gelo</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" name="spellDescription" id="spellDescription" />
+            </td>
+            <td>
+              <input type="text" name="spellDamage" id="spellDamage" />
+            </td>
+            <td>
+              <input type="text" name="spellReach" id="spellReach" />
+            </td>
+            <td>
+              <input type="text" name="spellMana" id="spellMana" />
+            </td>
+          </tr>
+        </table>
+        <input type="submit" value="Salvar" />
+      </form>
+    </div>
+
+  </div>
+  </div>
+
   <div class="container">
     <div class="details border">
       <h2 class="grid-title">DETALHES PESSOAIS</h2>
@@ -219,10 +275,10 @@
             </div>
           </div>
           <div class="checkboxs">
-            <input type="checkbox" id="escasso" name="escasso" value="escasso" />
-            <label for="escasso"> Escasso de Mana</label>
-            <input type="checkbox" id="seco" name="seco" value="seco" />
-            <label for="seco"> Seco de mana</label>
+            <input type="checkbox" id="manaScarce" name="manaScarce" value="manaScarce" />
+            <label for="manaScarce"> Escasso de Mana</label>
+            <input type="checkbox" id="noMana" name="noMana" value="noMana" />
+            <label for="noMana"> Seco de mana</label>
           </div>
         </div>
       </div>
@@ -233,14 +289,14 @@
         </div>
         <div class="body">
           <p>Armadura</p>
-          <input type="text" name="damage" id="damage" />
+          <input type="text" name="armor" id="armor" />
         </div>
         <div class="exposure">
           <p>XP</p>
-          <input type="text" name="damage" id="damage" />
+          <input type="text" name="xp" id="xp" />
           <div class="level">
             <p>Nível</p>
-            <input type="text" name="damage" id="damage" />
+            <input type="text" name="level" id="level" />
           </div>
         </div>
       </div>
@@ -281,36 +337,49 @@
       </table>
     </div>
 
+    <div class="spells border">
+      <div class="spellHeader">
+        <h2 class="grid-title">MAGIAS</h2>
+        <button id="addSpell">&plus;</button>
+      </div>
+      <hr />
+
+      <table class="spells" id="spells">
+        <tr>
+          <th>Nome</th>
+          <th>Elemento</th>
+          <th>Descrição</th>
+          <th>Dano</th>
+          <th>Alcance</th>
+          <th>Mana</th>
+          <th>Excluir</th>
+        </tr>
+      </table>
+    </div>
+
     <div class="inventory border">
       <h2 class="grid-title">INVENTÁRIO</h2>
       <hr />
-      <div class="skillsList" id="skillsList"></div>
-    </div>
-    <div class="spells border">
-      <h2 class="grid-title">MAGIAS</h2>
-      <hr />
-      <div class="skillsList" id="skillsList"></div>
+      <div class="weapons" id="inventoryList"></div>
     </div>
 
-  </div>
+    <div class="modal-overlay active">
+      <div class="modal">
+        <h2>MODIFICAR VIDA</h2>
+        <hr>
+        <form id="changeLife">
+          <span class="modalspan">Atual</span>
+          <input class="modalinput" type="number" name="current" id="lifeCurrent" min="0">
 
-  <div class="modal-overlay active">
-    <div class="modal">
-      <h2>MODIFICAR VIDA</h2>
-      <hr>
-      <form id="changeLife">
-        <span class="modalspan">Atual</span>
-        <input class="modalinput" type="number" name="current" id="lifeCurrent" min="0">
-
-        <span class="modalspan">Máximo</span>
-        <input class="modalinput" type="number" name="max" id="lifeMax" min="0">
-        <input class="modalbutton" type="submit" value="Salvar">
-      </form>
+          <span class="modalspan">Máximo</span>
+          <input class="modalinput" type="number" name="max" id="lifeMax" min="0">
+          <input class="modalbutton" type="submit" value="Salvar">
+        </form>
+      </div>
     </div>
-  </div>
 
-  <script src="characterSheet.js"></script>
-  <script src="saveDataToLocalStorage.js"></script>
+    <script src="characterSheet.js"></script>
+    <script src="saveDataToLocalStorage.js"></script>
 </body>
 
 </html>
