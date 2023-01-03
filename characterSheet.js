@@ -1,11 +1,11 @@
 const data = {
   name: 'Numerinhos',
   player: 'Mestre',
-  occupation: '?',
+  occupation: 'Sexólogo',
   age: 23,
   sex: 'male',
-  birthplace: '?',
-  residence: '?',
+  birthplace: 'São Miguel do Gostoso',
+  residence: 'Rio Grande do Norte',
 
   life: {
     current: 64,

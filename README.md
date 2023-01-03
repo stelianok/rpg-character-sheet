@@ -1,7 +1,7 @@
-## RPG: Character Sheet
+## Ficha de RPG - Ordem Carmesim
 
-- Uma página de ficha de personagem para RPG inspirada/copiada da **[Ordem Paranormal: Desconjuração](https://www.youtube.com/watch?v=b7PvLWZR6pg "Ordem Paranormal: Desconjuração")**, fiz com intuito de estudar e praticar HTML e CSS;
-- A character sheet page for RPG inspired/copied from the **[Ordem Paranormal: Desconjuração](https://www.youtube.com/watch?v=b7PvLWZR6pg "Paranormal Order: Misjudgment")**, I did to study and practice HTML and CSS;
+- Uma página de ficha de RPG modificada da ficha do **[Ryan Souza (LockDzn)](https://github.com/LockDzn/rpg-character-sheet "Ryan Souza (LockDzn)")**, feita com o intúito de ser utilizada como base para a ficha de outro sistema próprio;
+- A character sheet page for RPG modified from the **[Ryan Souza (LockDzn)](https://github.com/LockDzn/rpg-character-sheet "Ryan Souza (LockDzn)")**, made with the intention of being used as a base for a sheet in other TTRPG system;
 
 ### Lembretes
 - Nem todas as funções estão prontas.
@@ -11,4 +11,4 @@
 
 ---
 
-Feito com ♥ by **[Ryan Souza (LockDzn)](https://twitter.com/nuloki_ "Ryan Souza (LockDzn)")**
+- Modificada por **[Kauã Steliano](https://github.com/stelianok "Kauã Steliano")**, Com base na ficha do **[Ryan Souza (LockDzn)](https://twitter.com/nuloki_ "Ryan Souza (LockDzn)")**
