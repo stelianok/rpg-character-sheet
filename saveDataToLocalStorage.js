@@ -220,15 +220,34 @@ function savePlayerDataToLocalStorage() {
     "residence": residence,
     "life": {
       "current": lifeCurrent,
-      "max": lifeMax
+      "max": lifeMax,
+      "extra": {
+        "isLesioned": lesion,
+        "isInjured": injury,
+        "isDying": dying
+      }
     },
     "sanity": {
       "current": sanityCurrent,
-      "max": sanityMax
+      "max": sanityMax,
+      "extra": {
+        "isSlightlyInsane": slightlyInsane,
+        "isInsane": insane,
+      }
     },
     "mana": {
       "current": manaCurrent,
-      "max": manaMax
+      "max": manaMax,
+      "extra": {
+        "isManaScarce": manaScarce,
+        "noMana": noMana,
+      }
+    },
+    "extraInfo": {
+      "extraDamage": extraDamage,
+      "armor": armor,
+      "xp": xp,
+      "level": level
     },
     "weapons": items,
     "attributes": [
@@ -361,43 +380,44 @@ function ImportDataFromJSON() {
 
   document.getElementById('myFile').addEventListener('change', onChange);
 }
+
 function SetImportedData(uploadedFile) {
   // console.log(uploadedFile);
 
-  document.getElementById("name").value = uploadedFile.name
-  document.getElementById("player").value = uploadedFile.player
-  document.getElementById("occupation").value = uploadedFile.occupation
-  document.getElementById("age").value = uploadedFile.age
-  document.getElementById("sex").value = uploadedFile.sex
-  document.getElementById("birthplace").value = uploadedFile.birthplace
-  document.getElementById("residence").value = uploadedFile.residence
+  document.getElementById("name").value = uploadedFile.name;
+  document.getElementById("player").value = uploadedFile.player;
+  document.getElementById("occupation").value = uploadedFile.occupation;
+  document.getElementById("age").value = uploadedFile.age;
+  document.getElementById("sex").value = uploadedFile.sex;
+  document.getElementById("birthplace").value = uploadedFile.birthplace;
+  document.getElementById("residence").value = uploadedFile.residence;
 
   // Stats
-  document.getElementById("lifeCurrent").value = uploadedFile.life.current
-  document.getElementById("lifeMax").value = uploadedFile.life.max
+  document.getElementById("lifeCurrent").value = uploadedFile.life.current;
+  document.getElementById("lifeMax").value = uploadedFile.life.max;
 
-  document.getElementById("sanityCurrent").value = uploadedFile.sanity.current
-  document.getElementById("sanityMax").value = uploadedFile.sanity.max
+  document.getElementById("sanityCurrent").value = uploadedFile.sanity.current;
+  document.getElementById("sanityMax").value = uploadedFile.sanity.max;
 
-  document.getElementById("manaCurrent").value = uploadedFile.mana.current
-  document.getElementById("manaMax").value = uploadedFile.max
+  document.getElementById("manaCurrent").value = uploadedFile.mana.current;
+  document.getElementById("manaMax").value = uploadedFile.max;
 
   // Checkboxes
-  // document.getElementById("lesion").value = uploadedFile.name
-  // document.getElementById("injury").value = uploadedFile.name
-  // document.getElementById("dying").value = uploadedFile.name
+  document.getElementById("lesion").value = uploadedFile.life.extra.isLesioned;
+  document.getElementById("injury").value = uploadedFile.life.extra.isInjured;
+  document.getElementById("dying").value = uploadedFile.life.extra.isDying;
 
-  // document.getElementById("manaScarce").value = uploadedFile.name
-  // document.getElementById("noMana").value = uploadedFile.name
+  document.getElementById("manaScarce").value = uploadedFile.mana.manaScarce;
+  document.getElementById("noMana").value = uploadedFile.mana.noMana;
 
-  // document.getElementById("traumatized").value = uploadedFile.name
-  // document.getElementById("crazed").value = uploadedFile.name
+  document.getElementById("traumatized").value = uploadedFile.sanity.extra.isSlightlyInsane;
+  document.getElementById("crazed").value = uploadedFile.sanity.extra.isInsane;
 
   // Extra Info
-  // document.getElementById("damage").value = uploadedFile.name
-  // document.getElementById("armor").value = uploadedFile.name
-  // document.getElementById("xp").value = uploadedFile.name
-  // document.getElementById("level").value = uploadedFile.name
+  document.getElementById("damage").value = uploadedFile.extraInfo.extraDamage;
+  document.getElementById("armor").value = uploadedFile.extraInfo.armor;
+  document.getElementById("xp").value = uploadedFile.extraInfo.xp;
+  document.getElementById("level").value = uploadedFile.extraInfo.level;
 
   // Attributes
   document.getElementById("attribute_input_0").value = uploadedFile.attributes[0].amount;
