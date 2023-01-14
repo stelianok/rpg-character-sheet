@@ -347,7 +347,87 @@ function retrieveDataFromLocalStorage() {
   return playerData;
 }
 
-function importDataFromJSON() {
+function ImportDataFromJSON() {
+  function onChange(event) {
+    var reader = new FileReader();
+    reader.onload = onReaderLoad;
+    reader.readAsText(event.target.files[0]);
+  }
+
+  function onReaderLoad(event) {
+    console.log(event.target.result);
+    var uploadedFile = JSON.parse(event.target.result);
+    SetImportedData(uploadedFile)
+  }
+
+  document.getElementById('myFile').addEventListener('change', onChange);
+}
+function SetImportedData(uploadedFile) {
+  console.log(uploadedFile);
+
+  document.getElementById("name").value = uploadedFile.name
+  document.getElementById("player").value = uploadedFile.player
+  document.getElementById("occupation").value = uploadedFile.occupation
+  document.getElementById("age").value = uploadedFile.age
+  document.getElementById("sex").value = uploadedFile.sex
+  document.getElementById("birthplace").value = uploadedFile.birthplace
+  document.getElementById("residence").value = uploadedFile.residence
+
+  // Stats
+  document.getElementById("lifeCurrent").value = uploadedFile.life.current
+  document.getElementById("lifeMax").value = uploadedFile.life.max
+
+  document.getElementById("sanityCurrent").value = uploadedFile.sanity.current
+  document.getElementById("sanityMax").value = uploadedFile.sanity.max
+
+  document.getElementById("manaCurrent").value = uploadedFile.mana.current
+  document.getElementById("manaMax").value = uploadedFile.max
+
+  // Checkboxes
+  // document.getElementById("lesion").value = uploadedFile.name
+  // document.getElementById("injury").value = uploadedFile.name
+  // document.getElementById("dying").value = uploadedFile.name
+
+  // document.getElementById("manaScarce").value = uploadedFile.name
+  // document.getElementById("noMana").value = uploadedFile.name
+
+  // document.getElementById("traumatized").value = uploadedFile.name
+  // document.getElementById("crazed").value = uploadedFile.name
+
+  // Extra Info
+  // document.getElementById("damage").value = uploadedFile.name
+  // document.getElementById("armor").value = uploadedFile.name
+  // document.getElementById("xp").value = uploadedFile.name
+  // document.getElementById("level").value = uploadedFile.name
+
+  // Attributes
+  document.getElementById("attribute_input_0").value = uploadedFile.attributes[0].amount;
+  document.getElementById("attribute_input_1").value = uploadedFile.attributes[1].amount;
+  document.getElementById("attribute_input_2").value = uploadedFile.attributes[2].amount;
+  document.getElementById("attribute_input_3").value = uploadedFile.attributes[3].amount;
+  document.getElementById("attribute_input_4").value = uploadedFile.attributes[4].amount;
+  document.getElementById("attribute_input_5").value = uploadedFile.attributes[5].amount;
+  document.getElementById("attribute_input_6").value = uploadedFile.attributes[6].amount;
+
+  // Skills
+  document.getElementById("skill_input_0").value = uploadedFile.skills[0].amount;
+  document.getElementById("skill_input_1").value = uploadedFile.skills[1].amount;
+  document.getElementById("skill_input_2").value = uploadedFile.skills[2].amount;
+  document.getElementById("skill_input_3").value = uploadedFile.skills[3].amount;
+  document.getElementById("skill_input_4").value = uploadedFile.skills[4].amount;
+  document.getElementById("skill_input_5").value = uploadedFile.skills[5].amount;
+  document.getElementById("skill_input_6").value = uploadedFile.skills[6].amount;
+  document.getElementById("skill_input_7").value = uploadedFile.skills[7].amount;
+  document.getElementById("skill_input_8").value = uploadedFile.skills[8].amount;
+  document.getElementById("skill_input_9").value = uploadedFile.skills[9].amount;
+  document.getElementById("skill_input_10").value = uploadedFile.skills[10].amount;
+  document.getElementById("skill_input_11").value = uploadedFile.skills[11].amount;
+  document.getElementById("skill_input_12").value = uploadedFile.skills[12].amount;
+  document.getElementById("skill_input_13").value = uploadedFile.skills[13].amount;
+  document.getElementById("skill_input_14").value = uploadedFile.skills[14].amount;
+  document.getElementById("skill_input_15").value = uploadedFile.skills[15].amount;
+  document.getElementById("skill_input_16").value = uploadedFile.skills[16].amount;
+  document.getElementById("skill_input_17").value = uploadedFile.skills[17].amount;
 
 }
 
