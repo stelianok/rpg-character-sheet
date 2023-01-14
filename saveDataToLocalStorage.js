@@ -337,7 +337,7 @@ function savePlayerDataToLocalStorage() {
     ]
   }
 
-  console.warn(playerData);
+  // console.warn(playerData);
   localStorage.setItem('playerData', JSON.stringify(playerData));
 }
 
@@ -355,7 +355,6 @@ function ImportDataFromJSON() {
   }
 
   function onReaderLoad(event) {
-    console.log(event.target.result);
     var uploadedFile = JSON.parse(event.target.result);
     SetImportedData(uploadedFile)
   }
@@ -363,7 +362,7 @@ function ImportDataFromJSON() {
   document.getElementById('myFile').addEventListener('change', onChange);
 }
 function SetImportedData(uploadedFile) {
-  console.log(uploadedFile);
+  // console.log(uploadedFile);
 
   document.getElementById("name").value = uploadedFile.name
   document.getElementById("player").value = uploadedFile.player
