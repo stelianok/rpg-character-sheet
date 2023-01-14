@@ -1,4 +1,4 @@
-const data = {
+const dummyData = {
   name: 'Numerinhos',
   player: 'Mestre',
   occupation: 'Sexólogo',
@@ -160,6 +160,9 @@ const data = {
     },
   ],
 }
+
+let data = dummyData;
+
 
 
 data.weapons.map((weapon, index) => {

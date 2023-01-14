@@ -342,23 +342,22 @@ function savePlayerDataToLocalStorage() {
 }
 
 function retrieveDataFromLocalStorage() {
-  let playerData = JSON.parse(localStorage.playerData || NULL) || {};
+  let playerData = JSON.parse(localStorage.playerData || undefined) || {};
   console.log(playerData);
+  return playerData;
 }
 
-function download(filename, text) {
-  var pom = document.createElement('a');
-  pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  pom.setAttribute('download', filename);
+function importDataFromJSON() {
 
-  if (document.createEvent) {
-    var event = document.createEvent('MouseEvents');
-    event.initEvent('click', true, true);
-    pom.dispatchEvent(event);
-  }
-  else {
-    pom.click();
-  }
+}
+
+function download() {
+  let data = retrieveDataFromLocalStorage();
+  let dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`;
+  let downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href", dataStr);
+  downloadAnchorNode.setAttribute("download", `${playerName}.json`);
+  downloadAnchorNode.click();
 }
 // Esses códigos servem apenas para verificar se as informações
 // são resgatadas corretamente
