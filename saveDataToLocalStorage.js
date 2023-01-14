@@ -146,6 +146,70 @@ $("#weapons").find('tbody tr').each(
 )
 
 function savePlayerDataToLocalStorage() {
+  characterName = document.getElementById("name").value;
+  playerName = document.getElementById("player").value;
+  occupation = document.getElementById("occupation").value;
+  age = document.getElementById("age").value;
+  sex = document.getElementById("sex").value;
+  birthplace = document.getElementById("birthplace").value;
+  residence = document.getElementById("residence").value;
+
+  // Stats
+  lifeCurrent = document.getElementById("lifeCurrent").value;
+  lifeMax = document.getElementById("lifeMax").value;
+
+  sanityCurrent = document.getElementById("sanityCurrent").value;
+  sanityMax = document.getElementById("sanityMax").value;
+
+  manaCurrent = document.getElementById("manaCurrent").value;
+  manaMax = document.getElementById("manaMax").value;
+
+  // Checkboxes
+  lesion = document.getElementById("lesion").value;
+  injury = document.getElementById("injury").value;
+  dying = document.getElementById("dying").value;
+
+  manaScarce = document.getElementById("manaScarce").value;
+  noMana = document.getElementById("noMana").value;
+
+  slightlyInsane = document.getElementById("traumatized").value;
+  insane = document.getElementById("crazed").value;
+
+  // Extra Info
+  extraDamage = document.getElementById("damage").value;
+  armor = document.getElementById("armor").value;
+  xp = document.getElementById("xp").value;
+  level = document.getElementById("level").value;
+
+  // Attributes
+  strenght = document.getElementById("attribute_input_0").value;
+  constitution = document.getElementById("attribute_input_1").value;
+  dexterity = document.getElementById("attribute_input_2").value;
+  intelligence = document.getElementById("attribute_input_3").value;
+  education = document.getElementById("attribute_input_4").value;
+  charisma = document.getElementById("attribute_input_5").value;
+  power = document.getElementById("attribute_input_6").value;
+
+  // Skills
+  fighting = document.getElementById("skill_input_0").value;
+  shooting = document.getElementById("skill_input_1").value;
+  throwing = document.getElementById("skill_input_2").value;
+  medicine = document.getElementById("skill_input_3").value;
+  investigation = document.getElementById("skill_input_4").value;
+  insight = document.getElementById("skill_input_5").value;
+  history = document.getElementById("skill_input_6").value;
+  charm = document.getElementById("skill_input_7").value;
+  intimidation = document.getElementById("skill_input_8").value;
+  nature = document.getElementById("skill_input_9").value;
+  acrobatics = document.getElementById("skill_input_10").value;
+  language = document.getElementById("skill_input_11").value;
+  perception = document.getElementById("skill_input_12").value;
+  stealing = document.getElementById("skill_input_13").value;
+  furtivity = document.getElementById("skill_input_14").value;
+  computing = document.getElementById("skill_input_15").value;
+  driving = document.getElementById("skill_input_16").value;
+  athletics = document.getElementById("skill_input_17").value;
+
   let playerData = {
     "name": characterName,
     "player": playerName,
