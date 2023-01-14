@@ -145,8 +145,141 @@ $("#weapons").find('tbody tr').each(
   }
 )
 
-function saveDataToLocalStorage() {
+function savePlayerDataToLocalStorage() {
+  let playerData = {
+    "name": characterName,
+    "player": playerName,
+    "occupation": occupation,
+    "age": age,
+    "sex": sex,
+    "birthplace": birthplace,
+    "residence": residence,
+    "life": {
+      "current": lifeCurrent,
+      "max": lifeMax
+    },
+    "sanity": {
+      "current": sanityCurrent,
+      "max": sanityMax
+    },
+    "mana": {
+      "current": manaCurrent,
+      "max": manaMax
+    },
+    "weapons": items,
+    "attributes": [
+      {
+        "type": "Força",
+        "amount": strenght
+      },
+      {
+        "type": "Constituição",
+        "amount": constitution
+      },
+      {
+        "type": "Destreza",
+        "amount": dexterity
+      },
+      {
+        "type": "Inteligência",
+        "amount": intelligence
+      },
+      {
+        "type": "Educação",
+        "amount": education
+      },
+      {
+        "type": "Carisma",
+        "amount": charisma
+      },
+      {
+        "type": "Poder",
+        "amount": power
+      }
+    ],
+    "skills": [
+      {
+        "type": "Briga",
+        "amount": fighting
+      },
+      {
+        "type": "Tiro",
+        "amount": shooting
+      },
+      {
+        "type": "Arremesso",
+        "amount": throwing
+      },
+      {
+        "type": "Medicina",
+        "amount": medicine
+      },
+      {
+        "type": "Investigação",
+        "amount": investigation
+      },
+      {
+        "type": "Refletir",
+        "amount": insight
+      },
+      {
+        "type": "História",
+        "amount": history
+      },
+      {
+        "type": "Charme",
+        "amount": charm
+      },
+      {
+        "type": "Intimidação",
+        "amount": intimidation
+      },
+      {
+        "type": "Natureza",
+        "amount": nature
+      },
+      {
+        "type": "Acrobacia",
+        "amount": acrobatics
+      },
+      {
+        "type": "Lábia",
+        "amount": language
+      },
+      {
+        "type": "Percepção",
+        "amount": perception
+      },
+      {
+        "type": "Roubo",
+        "amount": stealing
+      },
+      {
+        "type": "Furtividade",
+        "amount": furtivity
+      },
+      {
+        "type": "Computação",
+        "amount": computing
+      },
+      {
+        "type": "Condução",
+        "amount": driving
+      },
+      {
+        "type": "Atletismo",
+        "amount": athletics
+      }
+    ]
+  }
 
+  console.warn(playerData);
+  localStorage.setItem('playerData', JSON.stringify(playerData));
+}
+
+function retrieveDataFromLocalStorage() {
+  let playerData = JSON.parse(localStorage.playerData || NULL) || {};
+  console.log(playerData);
 }
 
 function download(filename, text) {
