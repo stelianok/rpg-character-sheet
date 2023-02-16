@@ -379,10 +379,11 @@ function ImportDataFromJSON() {
   }
 
   document.getElementById('myFile').addEventListener('change', onChange);
+
 }
 
 function SetImportedData(uploadedFile) {
-  // console.log(uploadedFile);
+  console.log(uploadedFile.life.current);
 
   document.getElementById("name").value = uploadedFile.name;
   document.getElementById("player").value = uploadedFile.player;
@@ -392,15 +393,40 @@ function SetImportedData(uploadedFile) {
   document.getElementById("birthplace").value = uploadedFile.birthplace;
   document.getElementById("residence").value = uploadedFile.residence;
 
+  function calculateBar(current, max) {
+    if (current > max) {
+      return 100
+    } else if (current < 0) {
+      return 0
+    } else {
+      const value = (100 / max) * current
+      const string = value.toString().split('.')[0]
+      const percentage = Number(string)
+      return percentage
+    }
+  }
+
   // Stats
-  document.getElementById("lifeCurrent").value = uploadedFile.life.current;
-  document.getElementById("lifeMax").value = uploadedFile.life.max;
+  $('.lifeBar').css('width', `${calculateBar(uploadedFile.life.current, uploadedFile.life.max)}%`)
+  $('#lifeCount').text(`${uploadedFile.life.current}/${uploadedFile.life.max}`)
+  $('#lifeCurrent').val(uploadedFile.life.current)
+  $('#lifeMax').val(uploadedFile.life.max)
 
-  document.getElementById("sanityCurrent").value = uploadedFile.sanity.current;
-  document.getElementById("sanityMax").value = uploadedFile.sanity.max;
+  $('.sanityBar').css(
+    'width',
+    `${calculateBar(uploadedFile.sanity.current, uploadedFile.sanity.max)}%`
+  )
+  $('#sanityCount').text(`${uploadedFile.sanity.current}/${uploadedFile.sanity.max}`)
+  $('#sanityCurrent').val(uploadedFile.sanity.current)
+  $('#sanityMax').val(uploadedFile.sanity.max)
 
-  document.getElementById("manaCurrent").value = uploadedFile.mana.current;
-  document.getElementById("manaMax").value = uploadedFile.max;
+  $('.manaBar').css(
+    'width',
+    `${calculateBar(uploadedFile.mana.current, uploadedFile.mana.max)}%`
+  )
+  $('#manaCount').text(`${uploadedFile.mana.current}/${uploadedFile.mana.max}`)
+  $('#manaCurrent').val(uploadedFile.mana.current)
+  $('#manaMax').val(uploadedFile.mana.max)
 
   // Checkboxes
   document.getElementById("lesion").value = uploadedFile.life.extra.isLesioned;

@@ -16,8 +16,8 @@
 
   <button class="updateButton" onclick="savePlayerDataToLocalStorage()">Save</button>
   <button class="updateButton" onclick="download()" id="">Export JSON file</button>
-  <input type="file" id="myFile" name="filename">
-  <button class="updateButton" onclick="ImportDataFromJSON()" id="">Import JSON file</button>
+  <input type="file" id="myFile" name="filename" onchange="ImportDataFromJSON()">
+
   <h1 class="title">Ficha de agente da Ordem Carmesim</h1>
 
   <!-- modal -->
