@@ -383,7 +383,6 @@ function ImportDataFromJSON() {
 }
 
 function SetImportedData(uploadedFile) {
-  console.log(uploadedFile.life.current);
 
   document.getElementById("name").value = uploadedFile.name;
   document.getElementById("player").value = uploadedFile.player;
