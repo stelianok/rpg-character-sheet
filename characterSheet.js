@@ -1,23 +1,23 @@
 const dummyData = {
-  name: 'Numerinhos',
-  player: 'Mestre',
-  occupation: 'Sexólogo',
-  age: 23,
-  sex: 'male',
-  birthplace: 'São Miguel do Gostoso',
-  residence: 'Rio Grande do Norte',
+  name: '',
+  player: '',
+  occupation: '',
+  age: 0,
+  sex: '',
+  birthplace: '',
+  residence: '',
 
   life: {
-    current: 64,
-    max: 64,
+    current: 1,
+    max: 1,
   },
   sanity: {
-    current: 32,
-    max: 32,
+    current: 1,
+    max: 1,
   },
   mana: {
-    current: 96,
-    max: 96,
+    current: 1,
+    max: 1,
   },
 
   weapons: [
@@ -162,8 +162,6 @@ const dummyData = {
 }
 
 let data = dummyData;
-
-
 
 data.weapons.map((weapon, index) => {
   addWeaponToTable(weapon, index)
