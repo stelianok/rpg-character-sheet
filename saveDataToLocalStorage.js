@@ -163,6 +163,7 @@ const dummyData = {
 
 let data = dummyData;
 
+console.log("Dummy", data)
 data.weapons.map((weapon, index) => {
   addWeaponToTable(weapon, index)
 })
@@ -470,7 +471,6 @@ function deleteWeapon(id) {
 
 function updateWeaponArray() {
   data.weapons = [];
-
   $("#weapons").find('tbody tr').each(
     function (index, item) {
       let itemName = $(item).find('td').eq(0).text();
@@ -513,28 +513,6 @@ function addWeaponToTable(weapon, id) {
   $('table#weapons').append(newWeapon)
 }
 
-function loadWeaponTable(weapon, id) {
-  emptyTable("weapon");
-  const newWeapon = $(`
-      <tr id="${id}">
-        <td>${weapon.name}</td>
-        <td>${weapon.type}</td>
-        <td>${weapon.damage}</td>
-        <td>${weapon.numCurrent}</td>
-        <td>${weapon.numMax}</td>
-        <td>${weapon.attack}</td>
-        <td>${weapon.reach}</td>
-        <td>${weapon.defect}</td>
-        <td>${weapon.area}</td>
-        <td>
-            <button onclick="deleteWeapon(${id})">
-                <i class="fa fa-trash-o trashcan"></i>
-            </button>
-        </td>
-    </tr>`
-  )
-  $('table#weapons').append(newWeapon)
-}
 function addSpellToTable(spell, id) {
   const newSpell = $(`
       <tr id="${id}">
@@ -646,34 +624,17 @@ let driving = document.getElementById("skill_input_16").value;
 let athletics = document.getElementById("skill_input_17").value;
 
 
-function addItem(name, type, damage, currentAmmo, maxAmmo, allowedQuantity, range, defect, area) {
+function addItem(name, type, damage, numCurrent, numMax, attack, reach, defect, area) {
   this.name = name;
   this.type = type;
   this.damage = damage;
-  this.currentAmmo = currentAmmo;
-  this.maxAmmo = maxAmmo;
-  this.allowedQuantity = allowedQuantity;
-  this.range = range;
+  this.numCurrent = numCurrent;
+  this.numMax = numMax;
+  this.attack = attack;
+  this.reach = reach;
   this.defect = defect;
   this.area = area;
 }
-
-$("#weapons").find('tbody tr').each(
-  function (index, item) {
-    let itemName = $(item).find('td').eq(0).text();
-    let type = $(item).find('td').eq(1).text();
-    let damage = $(item).find('td').eq(2).text();
-    let currentAmmo = $(item).find('td').eq(3).text();
-    let maxAmmo = $(item).find('td').eq(4).text();
-    let allowedQuantity = $(item).find('td').eq(5).text();
-    let range = $(item).find('td').eq(6).text();
-    let defect = $(item).find('td').eq(7).text();
-    let area = $(item).find('td').eq(8).text();
-
-    data.weapons.push(new addItem(itemName, type, damage, currentAmmo, maxAmmo, allowedQuantity, range, defect, area));
-
-  }
-)
 
 function savePlayerDataToLocalStorage() {
   characterName = document.getElementById("name").value;
