@@ -417,7 +417,7 @@ function calculateBar(current, max) {
 // }
 function calcSkillOffset(skillNumber, d20Result) {
   if (skillNumber == 10) {
-    return 0;
+    return d20Result;
   }
   const offset = (skillNumber - 10) / 2;
 
