@@ -227,31 +227,35 @@ $(window).click(function (event) {
   }
 })
 
-function rollAtribute(amount) {
-  console.log(this)
-
+function rollAtribute(attribute, amount) {
   diceModal.css('display', 'block')
+  const diceNumber = rollDice('1d20')
 
-  setTimeout(() => {
-    $('.modalDice').css('transform', 'rotate(360deg)')
-    $('.modalDice').css('-webkit-transform', 'rotate(360deg)')
-  }, 1000)
+  const diceType = calcDice(amount, diceNumber)
+  $('#diceNumber').text(diceNumber)
+  $('#diceType').text(diceType)
 
-  setTimeout(() => {
-    const diceNumber = rollDice('1d20')
-    const diceType = calcDice(amount, diceNumber)
-    $('#diceNumber').text(diceNumber)
-    $('#diceType').text(diceType)
+  // setTimeout(() => {
+  //   $('.modalDice').css('transform', 'rotate(360deg)')
+  //   $('.modalDice').css('-webkit-transform', 'rotate(360deg)')
+  // }, 1000)
 
-    setTimeout(() => {
-      diceModal.css('display', 'none')
-      $('#diceNumber').text('')
-      $('#diceType').text('')
+  // setTimeout(() => {
+  //   const diceNumber = rollDice('1d20')
 
-      $('.modalDice').css('transform', 'rotate(0deg)')
-      $('.modalDice').css('-webkit-transform', 'rotate(0deg)')
-    }, 20000)
-  }, 2000)
+  //   const diceType = calcDice(amount, diceNumber)
+  //   $('#diceNumber').text(diceNumber)
+  //   $('#diceType').text(diceType)
+
+  //   setTimeout(() => {
+  //     diceModal.css('display', 'none')
+  //     $('#diceNumber').text('')
+  //     $('#diceType').text('')
+
+  //     $('.modalDice').css('transform', 'rotate(0deg)')
+  //     $('.modalDice').css('-webkit-transform', 'rotate(0deg)')
+  //   }, 20000)
+  // }, 2000)
 }
 
 $('.lifeBar').click(function () {
@@ -424,15 +428,26 @@ function calculateBar(current, max) {
   }
 }
 
-function calcDice(diceNumber, dice) {
-  const f5 = Math.floor(diceNumber / 5);
-  const f2 = Math.floor(diceNumber / 2);
-
-  if (dice > 20 - f5) return 'Sucesso Extremo';
-  else if (dice > 20 - f2) return 'Sucesso Bom';
-  else if (dice > 20 - diceNumber) return 'Sucesso Normal';
-  else if (dice == 1) return 'Desastre';
+function calculateD20Success(d20Result) {
+  if (d20Result == 20) return 'Sucesso Extremo';
+  else if (d20Result >= 15) return 'Sucesso Bom';
+  else if (d20Result > 10) return 'Sucesso Normal';
+  else if (d20Result == 1) return 'Desastre';
   else return 'Fracasso';
+}
+function calcSkillOffset(skillNumber, d20Result) {
+  if (skillNumber == 10) {
+    return 0;
+  }
+  const offset = (skillNumber - 10) / 2;
+
+  return d20Result + offset;
+}
+
+function calcDice(skillNumber, d20Result) {
+  let skillOffset = calcSkillOffset(skillNumber, d20Result);
+  let result = calculateD20Success(skillOffset);
+  return result;
 }
 
 function rollDice(dice) {
@@ -463,6 +478,8 @@ function closeModal(modal) {
   const Modal = $(modal)
   Modal.css('display', 'none')
 }
+
+updateWeaponArray();
 
 function deleteWeapon(id) {
   $(`tr#${id}`).remove()
