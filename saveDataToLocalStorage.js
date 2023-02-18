@@ -237,27 +237,6 @@ function rollAtribute(attribute, amount) {
   // $('#diceNumber').text("d20: " + diceNumber)
   // $('#diceType').text(""Resultado:  " + result")
 
-  // setTimeout(() => {
-  //   $('.modalDice').css('transform', 'rotate(360deg)')
-  //   $('.modalDice').css('-webkit-transform', 'rotate(360deg)')
-  // }, 1000)
-
-  // setTimeout(() => {
-  //   const diceNumber = rollDice('1d20')
-
-  //   const diceType = calcDice(amount, diceNumber)
-  //   $('#diceNumber').text(diceNumber)
-  //   $('#diceType').text(diceType)
-
-  //   setTimeout(() => {
-  //     diceModal.css('display', 'none')
-  //     $('#diceNumber').text('')
-  //     $('#diceType').text('')
-
-  //     $('.modalDice').css('transform', 'rotate(0deg)')
-  //     $('.modalDice').css('-webkit-transform', 'rotate(0deg)')
-  //   }, 20000)
-  // }, 2000)
 }
 
 $('.lifeBar').click(function () {
