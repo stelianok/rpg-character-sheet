@@ -232,10 +232,9 @@ function rollAtribute(attribute, amount) {
   const diceNumber = rollDice('1d20')
 
   const result = calcDice(amount, diceNumber)
-  $('#diceNumber').text(result)
-  // Se você quiser testar os resultados
-  // $('#diceNumber').text("d20: " + diceNumber)
-  // $('#diceType').text(""Resultado:  " + result")
+
+  $('#diceNumber').text("d20: " + diceNumber)
+  $('#diceType').text("Resultado:  " + result)
 
 }
 
