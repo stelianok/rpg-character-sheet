@@ -231,9 +231,11 @@ function rollAtribute(attribute, amount) {
   diceModal.css('display', 'block')
   const diceNumber = rollDice('1d20')
 
-  const diceType = calcDice(amount, diceNumber)
-  $('#diceNumber').text(diceNumber)
-  $('#diceType').text(diceType)
+  const result = calcDice(amount, diceNumber)
+  $('#diceNumber').text(result)
+  // Se você quiser testar os resultados
+  // $('#diceNumber').text("d20: " + diceNumber)
+  // $('#diceType').text(""Resultado:  " + result")
 
   // setTimeout(() => {
   //   $('.modalDice').css('transform', 'rotate(360deg)')
@@ -428,13 +430,13 @@ function calculateBar(current, max) {
   }
 }
 
-function calculateD20Success(d20Result) {
-  if (d20Result == 20) return 'Sucesso Extremo';
-  else if (d20Result >= 15) return 'Sucesso Bom';
-  else if (d20Result > 10) return 'Sucesso Normal';
-  else if (d20Result == 1) return 'Desastre';
-  else return 'Fracasso';
-}
+// function calculateD20Success(d20Result) {
+//   if (d20Result == 20) return 'Sucesso Extremo';
+//   else if (d20Result >= 15) return 'Sucesso Bom';
+//   else if (d20Result > 10) return 'Sucesso Normal';
+//   else if (d20Result == 1) return 'Desastre';
+//   else return 'Fracasso';
+// }
 function calcSkillOffset(skillNumber, d20Result) {
   if (skillNumber == 10) {
     return 0;
@@ -446,8 +448,8 @@ function calcSkillOffset(skillNumber, d20Result) {
 
 function calcDice(skillNumber, d20Result) {
   let skillOffset = calcSkillOffset(skillNumber, d20Result);
-  let result = calculateD20Success(skillOffset);
-  return result;
+  // let result = calculateD20Success(skillOffset);
+  return skillOffset;
 }
 
 function rollDice(dice) {
