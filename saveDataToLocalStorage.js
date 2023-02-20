@@ -151,14 +151,20 @@ const dummyData = {
   spells: [
     {
       name: 'AK-47',
-      type: 'Arma',
+      element: 'Arma',
       description: '1d6',
       damage: 16,
       reach: 48,
-      mana: '3 tiros',
-      reach: '20 m',
+      cost: '3 tiros',
     },
   ],
+  inventory: [
+    {
+      name: 'bolacha',
+      description: 'really cool description wow',
+      weight: '40kg'
+    }
+  ]
 }
 
 let data = dummyData;

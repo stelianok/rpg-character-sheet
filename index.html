@@ -338,14 +338,14 @@
       </table>
     </div>
 
-    <div class="spells border">
+    <div class="spells border" style="overflow-y: scroll; overflow-x: scroll;">
       <div class="spellHeader">
         <h2 class="grid-title">MAGIAS</h2>
         <button id="addSpell">&plus;</button>
       </div>
       <hr />
 
-      <table class="spells" id="spells">
+      <table class="weapons" id="spells">
         <tr>
           <th>Nome</th>
           <th>Elemento</th>
@@ -358,10 +358,21 @@
       </table>
     </div>
 
-    <div class="inventory border">
-      <h2 class="grid-title">INVENTÁRIO</h2>
+    <div class="inventory border" style="overflow-y: scroll; overflow-x: scroll;">
+      <div class="inventoryHeader">
+        <h2 class="grid-title">INVENTÁRIO</h2>
+        <button id="addItem">&plus;</button>
+      </div>
       <hr />
-      <div class="weapons" id="inventoryList"></div>
+
+      <table class="weapons" id="inventory">
+        <tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Peso</th>
+          <th>Excluir</th>
+        </tr>
+      </table>
     </div>
 
     <div class="modal-overlay active">
