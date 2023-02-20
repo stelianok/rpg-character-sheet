@@ -170,6 +170,7 @@ const dummyData = {
 let data = dummyData;
 
 loadWeaponTableDataFromJSON();
+loadSpellTableDataFromJSON();
 
 data.attributes.map((attribute, index) => {
   addAttribute(attribute, index)
@@ -315,11 +316,11 @@ $('#addSpellForm').submit(function (event) {
 
   const spell = {
     name: $('#spellName').val(),
-    type: $('#spellType').val(),
+    element: $('#spellType').val(),
     description: $('#spellDescription').val(),
     damage: $('#spellDamage').val(),
     reach: $('#spellReach').val(),
-    area: $('#spellMana').val(),
+    cost: $('#spellMana').val(),
   }
 
   data.spells.push(spell)
@@ -395,7 +396,7 @@ function calculateBar(current, max) {
   }
 }
 
-//Manipulate Tables
+//Manipulate Weapon Table
 function addWeaponToTable(weapon) {
   let id = Math.floor(Math.random() * 256);
 
@@ -496,6 +497,100 @@ function emptyWeaponTable() {
   )
 }
 
+//Manipulate Spells Table
+function addSpellToTable(spell) {
+  let id = Math.floor(Math.random() * 256);
+
+  const newTableItem = $(`
+  <tr id="${id}">
+    <td>${spell.name}</td>
+    <td>${spell.element}</td>
+    <td>${spell.description}</td>
+    <td>${spell.damage}</td>
+    <td>${spell.reach}</td>
+    <td>${spell.cost}</td>
+
+    <td>
+        <button onclick="deleteSpellFromTable(${id})">
+            <i class="fa fa-trash-o trashcan"></i>
+        </button>
+    </td>
+</tr>`
+  );
+
+  $('table#spells').append(newTableItem);
+
+
+}
+function deleteSpellFromTable(id) {
+  $(`tr#${id}`).remove();
+  updateSpellArray();
+}
+function updateSpellArray() {
+  data.spells = [];
+  if ($("#spells").find('tbody tr').length == 0) {
+    console.warn("Table empty!");
+    return;
+  }
+  $("#spells").find('tbody tr').each(
+    function (index, item) {
+      let itemName = $(item).find('td').eq(0).text();
+      if (!itemName) {
+        return;
+      }
+      let element = $(item).find('td').eq(1).text();
+      let description = $(item).find('td').eq(2).text();
+      let damage = $(item).find('td').eq(3).text();
+      let reach = $(item).find('td').eq(4).text();
+      let cost = $(item).find('td').eq(5).text();
+
+      let spell = {
+        name: itemName,
+        element,
+        description,
+        damage,
+        reach,
+        cost
+      }
+
+      data.spells.push(spell);
+    }
+  )
+}
+function loadSpellTableDataFromJSON(spells) {
+  emptySpellTable();
+
+  if (!spells) {
+    console.log("Spell argument is undefined, loading data.spells instead");
+
+    data.spells.map((spell) => {
+      addSpellToTable(spell);
+    });
+  }
+  else {
+    data.spells = [];
+    spells.map((spell) => {
+      addSpellToTable(spell);
+    })
+    data.spells = spells;
+  }
+
+}
+function emptySpellTable() {
+  if ($("#spells").find('tbody tr').length == 0) {
+    console.warn("Table empty!");
+    return;
+  }
+
+  $("#spells").find('tbody tr').each(
+    function (index, item) {
+      let id = $(item).attr('id');
+      $(`tr#${id}`).remove();
+    }
+  )
+}
+
+
 // Dice
 function rollAtribute(attribute, amount) {
   diceModal.css('display', 'block')
@@ -576,10 +671,8 @@ function addSkill(skill, id) {
   $('#skillsList')
 }
 function updateSkillsOrAttributes(skills, name) {
-  console.log("UEPA")
   $(`#${name}sList`).find('div').each(
     function (index, item) {
-      console.log(index, item);
       document.getElementById(`${name}_${index}`).innerHTML =
         ` <a onclick="rollAtribute('${skills[index].type}', ${skills[index].amount})">
             <img class="attribiteDice" src="./img/dado.png" alt="Dado">
@@ -761,6 +854,7 @@ function savePlayerDataToLocalStorage() {
       "level": level
     },
     "weapons": data.weapons,
+    "spells": data.spells,
     "attributes": [
       {
         "type": "Força",
@@ -961,7 +1055,7 @@ function SetImportedData(uploadedFile) {
   updateSkillsOrAttributes(uploadedFile.skills, "skill");
   updateSkillsOrAttributes(uploadedFile.attributes, "attribute");
   loadWeaponTableDataFromJSON(uploadedFile.weapons);
-
+  loadSpellTableDataFromJSON(uploadedFile.spells);
 }
 
 function download() {
