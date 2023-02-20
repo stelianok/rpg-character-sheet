@@ -171,6 +171,7 @@ let data = dummyData;
 
 loadWeaponTableDataFromJSON();
 loadSpellTableDataFromJSON();
+loadItemTableDataFromJSON();
 
 data.attributes.map((attribute, index) => {
   addAttribute(attribute, index)
@@ -229,7 +230,14 @@ $(window).click(function (event) {
     sanityModal.css('display', 'none')
   } else if (event.target.id == 'addWeaponModal') {
     closeModal('#addWeaponModal')
+  } else if (event.target.id == 'addSpellModal') {
+    closeModal('#addSpellModal')
   }
+  else if (event.target.id == 'addItemModal') {
+    closeModal('#addItemModal')
+  }
+
+
 })
 
 
@@ -253,7 +261,9 @@ $('#addWeapon').click(function () {
 $('#addSpell').click(function () {
   openModal('#addSpellModal')
 })
-
+$('#addItem').click(function () {
+  openModal('#addItemModal')
+})
 // Update events 
 $('#lesion').change(function () {
   if (this.checked) {
@@ -325,12 +335,25 @@ $('#addSpellForm').submit(function (event) {
   }
 
   data.spells.push(spell)
-  const id = data.spells.length - 1
-  addSpellToTable(spell, id)
+  addSpellToTable(spell)
 
   closeModal('#addSpellModal')
   event.preventDefault()
 })
+$('#addItemForm').submit(function (event) {
+  const item = {
+    name: $('#itemName').val(),
+    description: $('#itemDescription').val(),
+    weight: $('#itemWeight').val()
+  }
+
+  data.inventory.push(item);
+  addItemToTable(item);
+
+  closeModal('#addItemModal')
+  event.preventDefault();
+})
+
 $('#changeLife').submit(function (event) {
   let current = Number($('#lifeCurrent').val())
   const max = Number($('#lifeMax').val())
@@ -584,6 +607,89 @@ function emptySpellTable() {
   }
 
   $("#spells").find('tbody tr').each(
+    function (index, item) {
+      let id = $(item).attr('id');
+      $(`tr#${id}`).remove();
+    }
+  )
+}
+
+//Manipulate Inventory Table
+function addItemToTable(item) {
+  let id = Math.floor(Math.random() * 256);
+
+  const newTableItem = $(`
+  <tr id="${id}">
+    <td>${item.name}</td>
+    <td>${item.description}</td>
+    <td>${item.weight}</td>
+    <td>
+        <button onclick="deleteItemFromTable(${id})">
+            <i class="fa fa-trash-o trashcan"></i>
+        </button>
+    </td>
+</tr>`
+  );
+
+  $('table#inventory').append(newTableItem);
+
+
+}
+function deleteItemFromTable(id) {
+  $(`tr#${id}`).remove();
+  updateInventoryArray();
+}
+function updateInventoryArray() {
+  data.inventory = [];
+  if ($("#inventory").find('tbody tr').length == 0) {
+    console.warn("Table empty!");
+    return;
+  }
+  $("#inventory").find('tbody tr').each(
+    function (index, TableItem) {
+      let itemName = $(TableItem).find('td').eq(0).text();
+      if (!itemName) {
+        return;
+      }
+      let description = $(TableItem).find('td').eq(1).text();
+      let weight = $(TableItem).find('td').eq(2).text();
+
+      let item = {
+        name: itemName,
+        description,
+        weight,
+      }
+
+      data.inventory.push(item);
+    }
+  )
+}
+function loadItemTableDataFromJSON(items) {
+  emptyInventoryTable();
+
+  if (!items) {
+    console.log("Items argument is undefined, loading data.weapons instead");
+
+    data.inventory.map((item) => {
+      addItemToTable(item);
+    });
+  }
+  else {
+    data.inventory = [];
+    items.map((item) => {
+      addItemToTable(item);
+    })
+    data.inventory = items;
+  }
+
+}
+function emptyInventoryTable() {
+  if ($("#inventory").find('tbody tr').length == 0) {
+    console.warn("Table empty!");
+    return;
+  }
+
+  $("#inventory").find('tbody tr').each(
     function (index, item) {
       let id = $(item).attr('id');
       $(`tr#${id}`).remove();
@@ -859,6 +965,7 @@ function savePlayerDataToLocalStorage() {
     },
     "weapons": data.weapons,
     "spells": data.spells,
+    "inventory": data.inventory,
     "attributes": [
       {
         "type": "Força",
@@ -1061,6 +1168,7 @@ function SetImportedData(uploadedFile) {
   updateSkillsOrAttributes(uploadedFile.attributes, "attribute");
   loadWeaponTableDataFromJSON(uploadedFile.weapons);
   loadSpellTableDataFromJSON(uploadedFile.spells);
+  loadItemTableDataFromJSON(uploadedFile.inventory);
 }
 
 function download() {
