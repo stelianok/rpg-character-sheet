@@ -6,7 +6,7 @@ const dummyData = {
   sex: '',
   birthplace: '',
   residence: '',
-
+  arcane: '',
   life: {
     current: 1,
     max: 1,
@@ -187,6 +187,7 @@ $('#age').val(data.age)
 $('#sex').val(data.sex)
 $('#birthplace').val(data.birthplace)
 $('#residence').val(data.residence)
+$('#arcane').val(data.arcane)
 
 $('.lifeBar').css('width', `${calculateBar(data.life.current, data.life.max)}%`)
 $('#lifeCount').text(`${data.life.current}/${data.life.max}`)
@@ -691,6 +692,7 @@ let age = document.getElementById("age").value;
 let sex = document.getElementById("sex").value;
 let birthplace = document.getElementById("birthplace").value;
 let residence = document.getElementById("residence").value;
+let arcane = document.getElementById("arcane").value;
 
 // Stats
 let lifeCurrent = document.getElementById("lifeCurrent").value;
@@ -757,6 +759,7 @@ function savePlayerDataToLocalStorage() {
   sex = document.getElementById("sex").value;
   birthplace = document.getElementById("birthplace").value;
   residence = document.getElementById("residence").value;
+  arcane = document.getElementById("arcane").value;
 
   // Stats
   lifeCurrent = document.getElementById("lifeCurrent").value;
@@ -822,6 +825,7 @@ function savePlayerDataToLocalStorage() {
     "sex": sex,
     "birthplace": birthplace,
     "residence": residence,
+    "arcane": arcane,
     "life": {
       "current": lifeCurrent,
       "max": lifeMax,
@@ -998,6 +1002,7 @@ function SetImportedData(uploadedFile) {
   document.getElementById("sex").value = uploadedFile.sex;
   document.getElementById("birthplace").value = uploadedFile.birthplace;
   document.getElementById("residence").value = uploadedFile.residence;
+  document.getElementById("arcane").value = uploadedFile.arcane;
 
   function calculateBar(current, max) {
     if (current > max) {
@@ -1066,25 +1071,3 @@ function download() {
   downloadAnchorNode.setAttribute("download", `${playerName}.json`);
   downloadAnchorNode.click();
 }
-
-// Esses códigos servem apenas para verificar se as informações
-// são resgatadas corretamente
-
-// console.warn(characterName, playerName, occupation, age, sex, birthplace, residence)
-
-// console.warn(`Vida: ${lifeCurrent}/${lifeMax}`);
-// console.warn(`Sanidade: ${sanityCurrent}/${sanityMax}`);
-// console.warn(`Mana: ${manaCurrent}/${manaMax}`);
-
-// console.warn(`fighting: ${fighting}, shooting: ${shooting},
-// throwing: ${throwing}, medicine: ${medicine}, investigation: ${investigation},
-// insight: ${insight}, history: ${history}, charm: ${charm},
-// intimidation: ${intimidation}, nature: ${nature}, acrobatics: ${acrobatics},
-// language: ${language}, perception: ${perception}, stealing: ${stealing},
-// furtivity: ${furtivity}, computing: ${computing}, driving: ${driving}, athletics: ${athletics}`);
-
-// console.warn(`strenght: ${strenght}, constitution: ${constitution},
-//  dex: ${dexterity}, intelligence: ${intelligence}, education: ${education}
-//  charisma: ${charisma} power: ${power}`);
-
-// console.warn(items);
