@@ -400,7 +400,7 @@ function calculateBar(current, max) {
 
 //Manipulate Tables
 function addWeaponToTable(weapon) {
-  let id = data.weapons.indexOf(weapon);
+  let id = Math.floor(Math.random() * 256);
 
   const newTableItem = $(`
   <tr id="${id}">
@@ -425,20 +425,17 @@ function addWeaponToTable(weapon) {
 
 
 }
-
 function deleteWeaponFromTable(id) {
   $(`tr#${id}`).remove();
   updateWeaponArray();
   console.log(data.weapons);
 }
-
 function updateWeaponArray() {
   data.weapons = [];
   if ($("#weapons").find('tbody tr').length == 0) {
     console.warn("Table empty!");
     return;
   }
-
   $("#weapons").find('tbody tr').each(
     function (index, item) {
       let itemName = $(item).find('td').eq(0).text();
@@ -470,7 +467,6 @@ function updateWeaponArray() {
     }
   )
 }
-
 function loadWeaponTableDataFromJSON(weapons) {
   emptyWeaponTable();
 
@@ -482,9 +478,11 @@ function loadWeaponTableDataFromJSON(weapons) {
     });
   }
   else {
+    data.weapons = [];
     weapons.map((weapon) => {
       addWeaponToTable(weapon);
     })
+    data.weapons = weapons;
   }
 
   console.log(data.weapons);
@@ -497,7 +495,8 @@ function emptyWeaponTable() {
 
   $("#weapons").find('tbody tr').each(
     function (index, item) {
-      $(`tr#${index}`).remove();
+      let id = $(item).attr('id');
+      $(`tr#${id}`).remove();
     }
   )
 }
@@ -966,6 +965,8 @@ function SetImportedData(uploadedFile) {
   document.getElementById("skill_input_17").value = uploadedFile.skills[17].amount;
 
   loadWeaponTableDataFromJSON(uploadedFile.weapons);
+
+  console.log(data.weapons);
 }
 
 function download() {
