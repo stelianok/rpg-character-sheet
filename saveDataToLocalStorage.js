@@ -862,6 +862,8 @@ function savePlayerDataToLocalStorage() {
   }
 
   console.warn(playerData);
+  updateSkillsOrAttributes(playerData.skills, "skill");
+  updateSkillsOrAttributes(playerData.attributes, "attribute");
   localStorage.setItem('playerData', JSON.stringify(playerData));
 }
 function retrieveDataFromLocalStorage() {
