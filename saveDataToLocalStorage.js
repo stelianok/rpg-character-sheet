@@ -163,10 +163,7 @@ const dummyData = {
 
 let data = dummyData;
 
-console.log("Dummy", data)
-data.weapons.map((weapon, index) => {
-  addWeaponToTable(weapon, index)
-})
+loadWeaponTableDataFromJSON();
 
 data.attributes.map((attribute, index) => {
   addAttribute(attribute, index)
@@ -238,11 +235,11 @@ function rollAtribute(attribute, amount) {
 
 }
 
+// ClickEvents 
 $('.lifeBar').click(function () {
   console.log(this)
   lifeModal.css('display', 'block')
 })
-
 $('.sanityBar').click(function () {
   console.log(this)
   sanityModal.css('display', 'block')
@@ -251,15 +248,14 @@ $('.manaBar').click(function () {
   console.log(this)
   manaModal.css('display', 'block')
 })
-
 $('#addWeapon').click(function () {
   openModal('#addWeaponModal')
 })
-
 $('#addSpell').click(function () {
   openModal('#addSpellModal')
 })
 
+// Update events 
 $('#lesion').change(function () {
   if (this.checked) {
     console.log('Modo lesionamento grave ativado!')
@@ -267,7 +263,6 @@ $('#lesion').change(function () {
     console.log('Modo lesionamento grave desativado!')
   }
 })
-
 $('#injury').change(function () {
   if (this.checked) {
     console.log('Modo lesionamento ativado!')
@@ -275,7 +270,6 @@ $('#injury').change(function () {
     console.log('Modo lesionado desativado!')
   }
 })
-
 $('#dying').change(function () {
   if (this.checked) {
     console.log('Modo morrendo ativado!')
@@ -283,7 +277,6 @@ $('#dying').change(function () {
     console.log('Modo morrendo desativado!')
   }
 })
-
 $('#traumatized').change(function () {
   if (this.checked) {
     console.log('Modo traumatizado ativado!')
@@ -291,7 +284,6 @@ $('#traumatized').change(function () {
     console.log('Modo traumatizado desativado!')
   }
 })
-
 $('#crazed').change(function () {
   if (this.checked) {
     console.log('Modo enlouquecido ativado!')
@@ -300,6 +292,7 @@ $('#crazed').change(function () {
   }
 })
 
+// Submit forms
 $('#addWeaponForm').submit(function (event) {
 
   const weapon = {
@@ -315,13 +308,12 @@ $('#addWeaponForm').submit(function (event) {
   }
 
   data.weapons.push(weapon)
-  const id = data.weapons.length - 1
-  addWeaponToTable(weapon, id)
 
+  addWeaponToTable(weapon)
+  console.log(data.weapons);
   closeModal('#addWeaponModal')
   event.preventDefault()
 })
-
 $('#addSpellForm').submit(function (event) {
 
   const spell = {
@@ -340,7 +332,6 @@ $('#addSpellForm').submit(function (event) {
   closeModal('#addSpellModal')
   event.preventDefault()
 })
-
 $('#changeLife').submit(function (event) {
   let current = Number($('#lifeCurrent').val())
   const max = Number($('#lifeMax').val())
@@ -358,7 +349,6 @@ $('#changeLife').submit(function (event) {
   closeModal('#lifeModal')
   event.preventDefault()
 })
-
 $('#changeSanity').submit(function (event) {
   let current = Number($('#sanityCurrent').val())
   const max = Number($('#sanityMax').val())
@@ -376,7 +366,6 @@ $('#changeSanity').submit(function (event) {
   closeModal('#sanityModal')
   event.preventDefault()
 })
-
 $('#changeMana').submit(function (event) {
   let current = Number($('#manaCurrent').val())
   const max = Number($('#manaMax').val())
@@ -395,6 +384,7 @@ $('#changeMana').submit(function (event) {
   event.preventDefault()
 })
 
+// Calculate Bars
 function calculateBar(current, max) {
   if (current > max) {
     return 100
@@ -408,13 +398,111 @@ function calculateBar(current, max) {
   }
 }
 
-// function calculateD20Success(d20Result) {
-//   if (d20Result == 20) return 'Sucesso Extremo';
-//   else if (d20Result >= 15) return 'Sucesso Bom';
-//   else if (d20Result > 10) return 'Sucesso Normal';
-//   else if (d20Result == 1) return 'Desastre';
-//   else return 'Fracasso';
-// }
+//Manipulate Tables
+function addWeaponToTable(weapon) {
+  let id = data.weapons.indexOf(weapon);
+
+  const newTableItem = $(`
+  <tr id="${id}">
+    <td>${weapon.name}</td>
+    <td>${weapon.type}</td>
+    <td>${weapon.damage}</td>
+    <td>${weapon.numCurrent}</td>
+    <td>${weapon.numMax}</td>
+    <td>${weapon.attack}</td>
+    <td>${weapon.reach}</td>
+    <td>${weapon.defect}</td>
+    <td>${weapon.area}</td>
+    <td>
+        <button onclick="deleteWeaponFromTable(${id})">
+            <i class="fa fa-trash-o trashcan"></i>
+        </button>
+    </td>
+</tr>`
+  );
+
+  $('table#weapons').append(newTableItem);
+
+
+}
+
+function deleteWeaponFromTable(id) {
+  $(`tr#${id}`).remove();
+  updateWeaponArray();
+  console.log(data.weapons);
+}
+
+function updateWeaponArray() {
+  data.weapons = [];
+  if ($("#weapons").find('tbody tr').length == 0) {
+    console.warn("Table empty!");
+    return;
+  }
+
+  $("#weapons").find('tbody tr').each(
+    function (index, item) {
+      let itemName = $(item).find('td').eq(0).text();
+      if (!itemName) {
+        return;
+      }
+      let type = $(item).find('td').eq(1).text();
+      let damage = $(item).find('td').eq(2).text();
+      let currentAmmo = $(item).find('td').eq(3).text();
+      let maxAmmo = $(item).find('td').eq(4).text();
+      let allowedQuantity = $(item).find('td').eq(5).text();
+      let range = $(item).find('td').eq(6).text();
+      let defect = $(item).find('td').eq(7).text();
+      let area = $(item).find('td').eq(8).text();
+
+      let weapon = {
+        name: itemName,
+        type: type,
+        damage: damage,
+        numCurrent: currentAmmo,
+        numMax: maxAmmo,
+        attack: allowedQuantity,
+        range: range,
+        defect: defect,
+        area: area
+      }
+
+      data.weapons.push(weapon);
+    }
+  )
+}
+
+function loadWeaponTableDataFromJSON(weapons) {
+  emptyWeaponTable();
+
+  if (!weapons) {
+    console.log("Weapon argument is undefined, loading data.weapons instead");
+
+    data.weapons.map((weapon) => {
+      addWeaponToTable(weapon);
+    });
+  }
+  else {
+    weapons.map((weapon) => {
+      addWeaponToTable(weapon);
+    })
+  }
+
+  console.log(data.weapons);
+}
+function emptyWeaponTable() {
+  if ($("#weapons").find('tbody tr').length == 0) {
+    console.warn("Table empty!");
+    return;
+  }
+
+  $("#weapons").find('tbody tr').each(
+    function (index, item) {
+      $(`tr#${index}`).remove();
+    }
+  )
+}
+
+// Dice
 function calcSkillOffset(skillNumber, d20Result) {
   if (skillNumber == 10) {
     return d20Result;
@@ -423,13 +511,11 @@ function calcSkillOffset(skillNumber, d20Result) {
 
   return d20Result + offset;
 }
-
 function calcDice(skillNumber, d20Result) {
   let skillOffset = calcSkillOffset(skillNumber, d20Result);
   // let result = calculateD20Success(skillOffset);
   return skillOffset;
 }
-
 function rollDice(dice) {
   let [count, max] = dice.split('d')
 
@@ -449,86 +535,17 @@ function rollDice(dice) {
   }
 }
 
+// Modal
 function openModal(modal) {
   const Modal = $(modal)
   Modal.css('display', 'block')
 }
-
 function closeModal(modal) {
   const Modal = $(modal)
   Modal.css('display', 'none')
 }
 
-updateWeaponArray();
-
-function deleteWeapon(id) {
-  $(`tr#${id}`).remove()
-  updateWeaponArray();
-}
-
-function updateWeaponArray() {
-  data.weapons = [];
-  $("#weapons").find('tbody tr').each(
-    function (index, item) {
-      let itemName = $(item).find('td').eq(0).text();
-      let type = $(item).find('td').eq(1).text();
-      let damage = $(item).find('td').eq(2).text();
-      let currentAmmo = $(item).find('td').eq(3).text();
-      let maxAmmo = $(item).find('td').eq(4).text();
-      let allowedQuantity = $(item).find('td').eq(5).text();
-      let range = $(item).find('td').eq(6).text();
-      let defect = $(item).find('td').eq(7).text();
-      let area = $(item).find('td').eq(8).text();
-
-      data.weapons.push(new addItem(itemName, type, damage, currentAmmo, maxAmmo, allowedQuantity, range, defect, area));
-      console.log(data.weapons)
-    }
-  )
-}
-
-
-
-function addWeaponToTable(weapon, id) {
-  const newWeapon = $(`
-      <tr id="${id}">
-        <td>${weapon.name}</td>
-        <td>${weapon.type}</td>
-        <td>${weapon.damage}</td>
-        <td>${weapon.numCurrent}</td>
-        <td>${weapon.numMax}</td>
-        <td>${weapon.attack}</td>
-        <td>${weapon.reach}</td>
-        <td>${weapon.defect}</td>
-        <td>${weapon.area}</td>
-        <td>
-            <button onclick="deleteWeapon(${id})">
-                <i class="fa fa-trash-o trashcan"></i>
-            </button>
-        </td>
-    </tr>`
-  )
-  $('table#weapons').append(newWeapon)
-}
-
-function addSpellToTable(spell, id) {
-  const newSpell = $(`
-      <tr id="${id}">
-        <td>${spell.name}</td>
-        <td>${spell.type}</td>
-        <td>${spell.description}</td>
-        <td>${spell.damage}</td>
-        <td>${spell.reach}</td>
-        <td>${spell.mana}</td>
-        <td>
-            <button onclick="deleteSpell(${id})">
-                <i class="fa fa-trash-o trashcan"></i>
-            </button>
-        </td>
-    </tr>`
-  )
-  $('table#spells').append(newSpell)
-}
-
+// Attributes and Skills
 function addAttribute(attribute, id) {
   const newAttribute = $(
     `<div class="attribute" id="attribute_${id}">
@@ -541,7 +558,6 @@ function addAttribute(attribute, id) {
   `)
   $('#attributesList').append(newAttribute)
 }
-
 function addSkill(skill, id) {
   const newSkill = $(
     `<div class="skill" id="skill_${id}">
@@ -620,19 +636,7 @@ let computing = document.getElementById("skill_input_15").value;
 let driving = document.getElementById("skill_input_16").value;
 let athletics = document.getElementById("skill_input_17").value;
 
-
-function addItem(name, type, damage, numCurrent, numMax, attack, reach, defect, area) {
-  this.name = name;
-  this.type = type;
-  this.damage = damage;
-  this.numCurrent = numCurrent;
-  this.numMax = numMax;
-  this.attack = attack;
-  this.reach = reach;
-  this.defect = defect;
-  this.area = area;
-}
-
+// Manipulate Local Storage
 function savePlayerDataToLocalStorage() {
   characterName = document.getElementById("name").value;
   playerName = document.getElementById("player").value;
@@ -847,13 +851,13 @@ function savePlayerDataToLocalStorage() {
   console.warn(playerData);
   localStorage.setItem('playerData', JSON.stringify(playerData));
 }
-
 function retrieveDataFromLocalStorage() {
   let playerData = JSON.parse(localStorage.playerData || undefined) || {};
   console.log(playerData);
   return playerData;
 }
 
+// Manipulate JSON file
 function ImportDataFromJSON() {
   function onChange(event) {
     var reader = new FileReader();
@@ -961,14 +965,7 @@ function SetImportedData(uploadedFile) {
   document.getElementById("skill_input_16").value = uploadedFile.skills[16].amount;
   document.getElementById("skill_input_17").value = uploadedFile.skills[17].amount;
 
-  data.weapons.map((weapon, index) => {
-    deleteWeapon(index);
-  })
-
-  uploadedFile.weapons.map((weapon, index) => {
-    addWeaponToTable(weapon, index)
-  })
-
+  loadWeaponTableDataFromJSON(uploadedFile.weapons);
 }
 
 function download() {
@@ -979,6 +976,7 @@ function download() {
   downloadAnchorNode.setAttribute("download", `${playerName}.json`);
   downloadAnchorNode.click();
 }
+
 // Esses códigos servem apenas para verificar se as informações
 // são resgatadas corretamente
 
