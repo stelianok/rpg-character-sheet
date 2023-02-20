@@ -224,16 +224,7 @@ $(window).click(function (event) {
   }
 })
 
-function rollAtribute(attribute, amount) {
-  diceModal.css('display', 'block')
-  const diceNumber = rollDice('1d20')
 
-  const result = calcDice(amount, diceNumber)
-
-  $('#diceNumber').text("d20: " + diceNumber)
-  $('#diceType').text("Resultado:  " + result)
-
-}
 
 // ClickEvents 
 $('.lifeBar').click(function () {
@@ -428,7 +419,6 @@ function addWeaponToTable(weapon) {
 function deleteWeaponFromTable(id) {
   $(`tr#${id}`).remove();
   updateWeaponArray();
-  console.log(data.weapons);
 }
 function updateWeaponArray() {
   data.weapons = [];
@@ -485,7 +475,6 @@ function loadWeaponTableDataFromJSON(weapons) {
     data.weapons = weapons;
   }
 
-  console.log(data.weapons);
 }
 function emptyWeaponTable() {
   if ($("#weapons").find('tbody tr').length == 0) {
@@ -502,6 +491,16 @@ function emptyWeaponTable() {
 }
 
 // Dice
+function rollAtribute(attribute, amount) {
+  diceModal.css('display', 'block')
+  const diceNumber = rollDice('1d20')
+
+  const result = calcDice(amount, diceNumber)
+
+  $('#diceNumber').text("d20: " + diceNumber)
+  $('#diceType').text("Resultado:  " + result)
+
+}
 function calcSkillOffset(skillNumber, d20Result) {
   if (skillNumber == 10) {
     return d20Result;
@@ -568,6 +567,21 @@ function addSkill(skill, id) {
   </div>
   `)
   $('#skillsList').append(newSkill)
+  $('#skillsList')
+}
+function updateSkillsOrAttributes(skills, name) {
+  console.log("UEPA")
+  $(`#${name}sList`).find('div').each(
+    function (index, item) {
+      console.log(index, item);
+      document.getElementById(`${name}_${index}`).innerHTML =
+        ` <a onclick="rollAtribute('${skills[index].type}', ${skills[index].amount})">
+            <img class="attribiteDice" src="./img/dado.png" alt="Dado">
+          </a>
+          <h3>${skills[index].type}</h3>
+          <input type="text" name="appearance" value="${skills[index].amount}" id="${name}_input_${index}"/>`
+    }
+  )
 }
 
 // Player Info
@@ -935,38 +949,11 @@ function SetImportedData(uploadedFile) {
   document.getElementById("xp").value = uploadedFile.extraInfo.xp;
   document.getElementById("level").value = uploadedFile.extraInfo.level;
 
-  // Attributes
-  document.getElementById("attribute_input_0").value = uploadedFile.attributes[0].amount;
-  document.getElementById("attribute_input_1").value = uploadedFile.attributes[1].amount;
-  document.getElementById("attribute_input_2").value = uploadedFile.attributes[2].amount;
-  document.getElementById("attribute_input_3").value = uploadedFile.attributes[3].amount;
-  document.getElementById("attribute_input_4").value = uploadedFile.attributes[4].amount;
-  document.getElementById("attribute_input_5").value = uploadedFile.attributes[5].amount;
-  document.getElementById("attribute_input_6").value = uploadedFile.attributes[6].amount;
 
-  // Skills
-  document.getElementById("skill_input_0").value = uploadedFile.skills[0].amount;
-  document.getElementById("skill_input_1").value = uploadedFile.skills[1].amount;
-  document.getElementById("skill_input_2").value = uploadedFile.skills[2].amount;
-  document.getElementById("skill_input_3").value = uploadedFile.skills[3].amount;
-  document.getElementById("skill_input_4").value = uploadedFile.skills[4].amount;
-  document.getElementById("skill_input_5").value = uploadedFile.skills[5].amount;
-  document.getElementById("skill_input_6").value = uploadedFile.skills[6].amount;
-  document.getElementById("skill_input_7").value = uploadedFile.skills[7].amount;
-  document.getElementById("skill_input_8").value = uploadedFile.skills[8].amount;
-  document.getElementById("skill_input_9").value = uploadedFile.skills[9].amount;
-  document.getElementById("skill_input_10").value = uploadedFile.skills[10].amount;
-  document.getElementById("skill_input_11").value = uploadedFile.skills[11].amount;
-  document.getElementById("skill_input_12").value = uploadedFile.skills[12].amount;
-  document.getElementById("skill_input_13").value = uploadedFile.skills[13].amount;
-  document.getElementById("skill_input_14").value = uploadedFile.skills[14].amount;
-  document.getElementById("skill_input_15").value = uploadedFile.skills[15].amount;
-  document.getElementById("skill_input_16").value = uploadedFile.skills[16].amount;
-  document.getElementById("skill_input_17").value = uploadedFile.skills[17].amount;
-
+  updateSkillsOrAttributes(uploadedFile.skills, "skill");
+  updateSkillsOrAttributes(uploadedFile.attributes, "attribute");
   loadWeaponTableDataFromJSON(uploadedFile.weapons);
 
-  console.log(data.weapons);
 }
 
 function download() {
