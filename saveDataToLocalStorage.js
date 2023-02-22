@@ -714,8 +714,10 @@ function calcSkillOffset(skillNumber, d20Result) {
     return d20Result;
   }
   const offset = (skillNumber - 10) / 2;
+  const roundedOffset = Math.ceil(offset);
 
-  return d20Result + offset;
+  // console.log(`${offset}, Rounded: ${roundedOffset}`)
+  return d20Result + roundedOffset;
 }
 function calcDice(skillNumber, d20Result) {
   let skillOffset = calcSkillOffset(skillNumber, d20Result);
